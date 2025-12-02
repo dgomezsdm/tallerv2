@@ -1,0 +1,22 @@
+<ion-card (click)="onCardClick()" button="true">
+  <ion-card-header>
+    <ion-card-subtitle class="golden-text-700">
+      {{ item?.category }}
+    </ion-card-subtitle>
+    <ion-card-title class="golden-text-950">
+      {{ item?.title }}
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p class="golden-text-900">{{ item?.description }}</p>
+    <ion-button
+      fill="clear"
+      color="primary"
+      size="small"
+      class="ion-margin-top"
+    >
+      Ver más
+      <ion-icon slot="end" name="chevron-forward"></ion-icon>
+    </ion-button>
+  </ion-card-content>
+</ion-card>

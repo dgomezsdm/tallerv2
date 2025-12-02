@@ -19,6 +19,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  homeOutline,
   mailOutline,
   mailSharp,
   paperPlaneOutline,
@@ -59,6 +60,7 @@ import {
 })
 export class AppComponent {
   public appPages = [
+    { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
     { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
     { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
@@ -69,6 +71,7 @@ export class AppComponent {
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {
     addIcons({
+      homeOutline,
       mailOutline,
       mailSharp,
       paperPlaneOutline,
