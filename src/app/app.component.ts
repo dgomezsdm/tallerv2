@@ -20,6 +20,7 @@ import {
 import { addIcons } from 'ionicons';
 import {
   homeOutline,
+  homeSharp,
   mailOutline,
   mailSharp,
   paperPlaneOutline,
@@ -34,6 +35,10 @@ import {
   warningSharp,
   bookmarkOutline,
   bookmarkSharp,
+  personOutline,
+  personSharp,
+  settingsOutline,
+  settingsSharp,
 } from 'ionicons/icons';
 
 @Component({
@@ -59,6 +64,7 @@ import {
   ],
 })
 export class AppComponent {
+  // Páginas principales
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
@@ -68,10 +74,19 @@ export class AppComponent {
     { title: 'Trash', url: '/folder/trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/spam', icon: 'warning' },
   ];
+
+  // Sección de configuración
+  public settingsPages = [
+    { title: 'Profile', url: '/profile', icon: 'person' },
+    { title: 'Settings', url: '/settings', icon: 'settings' },
+  ];
+
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
   constructor() {
     addIcons({
       homeOutline,
+      homeSharp,
       mailOutline,
       mailSharp,
       paperPlaneOutline,
@@ -86,6 +101,10 @@ export class AppComponent {
       warningSharp,
       bookmarkOutline,
       bookmarkSharp,
+      personOutline,
+      personSharp,
+      settingsOutline,
+      settingsSharp,
     });
   }
 }

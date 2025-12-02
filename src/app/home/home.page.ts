@@ -24,7 +24,9 @@ import { add, notifications, search } from 'ionicons/icons';
 // Importar componentes personalizados
 import { HeaderComponent } from './components/header/header.component';
 import { CardItemComponent } from './components/card-item/card-item.component';
-import { HomeService } from './services/home.services';
+import { HomeService } from './services/home';
+
+// Importar servicio
 
 @Component({
   selector: 'app-home',
@@ -40,10 +42,6 @@ import { HomeService } from './services/home.services';
     IonToolbar,
     IonButtons,
     IonMenuButton,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
     IonButton,
     IonIcon,
     IonGrid,
