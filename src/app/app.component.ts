@@ -40,8 +40,6 @@ import {
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
   imports: [
-    IonToast,
-    IonButton,
     RouterLink,
     RouterLinkActive,
     IonApp,
