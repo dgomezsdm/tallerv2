@@ -1,0 +1,23 @@
+<!-- <ion-searchbar
+  [(ngModel)]="searchTerm"
+  [placeholder]="placeholder"
+  [debounce]="debounce"
+  (ionInput)="onSearchChange($event)"
+  (ionClear)="onClear()"
+  mode="ios"
+  animated="true"
+  showClearButton="focus"
+  search-icon="search"
+  clear-icon="close"
+></ion-searchbar> -->
+<ion-searchbar
+  [(ngModel)]="searchTerm"
+  [placeholder]="placeholder"
+  [debounce]="debounce"
+  (ionInput)="onSearchChange($event.target.value)"
+  (ionClear)="onClear()"
+  mode="ios"
+  animated
+  showClearButton="focus"
+>
+</ion-searchbar>

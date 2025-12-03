@@ -3,49 +3,52 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+
     <ion-title>Home</ion-title>
+
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="notifications"></ion-icon>
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon name="search"></ion-icon>
-      </ion-button>
+      <!-- <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+      </ion-button> -->
+      <date-filter (rangeSelected)="onRangeSelected($event)"></date-filter>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <!-- Componente Header personalizado -->
-  <app-header></app-header>
+<ion-content [fullscreen]="true" class="home-content">
+  <!-- Filtro de fecha -->
+  <!-- <div class="filter-container">
+    <date-filter (rangeSelected)="onRangeSelected($event)"></date-filter>
+  </div> -->
 
-  <!-- Contenido principal -->
-  <ion-grid>
+  <!-- Searchbar -->
+  <div class="search-container">
+    <app-search-bar
+      placeholder="Buscar productos..."
+      [debounce]="500"
+      (searchChange)="onSearch($event)"
+      (searchClear)="onClearSearch()"
+    ></app-search-bar>
+  </div>
+
+  <!-- Grid de cards -->
+  <ion-grid fixed>
     <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let item of items">
+      <ion-col
+        size="12"
+        size-sm="6"
+        size-md="4"
+        size-lg="3"
+        *ngFor="let ap of appointments"
+      >
         <app-card-item
-          *ngFor="let ap of appointments"
           [appointment]="ap"
           (itemClick)="openAppointment(ap)"
         ></app-card-item>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <!-- FAB Button -->
-  <ion-button
-    expand="block"
-    color="primary"
-    class="ion-margin"
-    style="
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-    "
-  >
-    <ion-icon name="add"></ion-icon>
-  </ion-button>
 </ion-content>

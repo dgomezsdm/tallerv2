@@ -1,0 +1,130 @@
+// .bottom-sheet {
+//   --height: auto;
+//   --border-radius: 16px 16px 0 0;
+
+//   &::part(content) {
+//     max-height: 85vh;
+//   }
+// }
+
+// .sheet-container {
+//   padding: 0 16px 24px;
+
+//   .handle-bar {
+//     width: 40px;
+//     height: 4px;
+//     background: var(--ion-color-medium);
+//     border-radius: 2px;
+//     margin: 12px auto 8px;
+//     opacity: 0.5;
+//   }
+
+//   ion-toolbar {
+//     --background: transparent;
+//     --padding-start: 0;
+//     --padding-end: 0;
+//     margin-bottom: 8px;
+
+//     ion-title {
+//       font-size: 20px;
+//       font-weight: 600;
+//     }
+//   }
+
+//   .calendars {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 24px;
+//     margin: 20px 0 24px;
+
+//     .cal {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+
+//       h4 {
+//         margin: 0 0 12px 0;
+//         font-weight: 600;
+//         font-size: 16px;
+//        // color: var(--ion-color-dark);
+//       }
+
+//       ion-datetime {
+//         border: 1px solid var(--ion-color-light-shade);
+//         border-radius: 24px;
+//         width: 100%;
+
+//       }
+//     }
+//   }
+
+
+// }
+.bottom-sheet {
+  --height: auto;
+  --border-radius: 16px 16px 0 0;
+
+  &::part(content) {
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+}
+
+.sheet-container {
+  padding: 0 16px 24px;
+  overflow-y: auto;
+  max-height: 80vh;
+
+  .handle-bar {
+    width: 40px;
+    height: 4px;
+    background: var(--ion-color-medium);
+    border-radius: 2px;
+    margin: 12px auto 8px;
+    opacity: 0.5;
+  }
+
+  ion-toolbar {
+    --background: transparent;
+    --padding-start: 0;
+    --padding-end: 0;
+    margin-bottom: 8px;
+
+    ion-title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  .calendars {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 20px 0 24px;
+
+    .cal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h4 {
+        margin: 0 0 12px 0;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      ion-datetime {
+        border: 1px solid var(--ion-color-light-shade);
+        border-radius: 24px;
+        width: 100%;
+      }
+    }
+  }
+
+  ion-button[expand="block"] {
+    margin-top: 8px;
+    --border-radius: 12px;
+    height: 48px;
+    font-weight: 600;
+  }
+}

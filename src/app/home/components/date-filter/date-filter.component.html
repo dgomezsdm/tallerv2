@@ -1,0 +1,61 @@
+<!-- <ion-button expand="block" color="primary" (click)="openSheet()">
+  Seleccionar rango de fechas
+</ion-button> -->
+
+<ion-button (click)="openSheet()" fill="clear">
+  <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+</ion-button>
+
+<ion-modal
+  [isOpen]="showSheet"
+  (didDismiss)="closeSheet()"
+  class="bottom-sheet"
+  [breakpoints]="[0, 1]"
+  [initialBreakpoint]="1"
+  [backdropDismiss]="true"
+  [backdropBreakpoint]="0.5"
+>
+  <ng-template>
+    <div class="sheet-container">
+      <div class="handle-bar"></div>
+
+      <ion-toolbar>
+        <ion-title>Rango de Fechas</ion-title>
+        <ion-button fill="clear" slot="end" (click)="closeSheet()">
+          <ion-icon name="chevron-down"></ion-icon>
+        </ion-button>
+      </ion-toolbar>
+
+      <div class="calendars">
+        <div class="cal">
+          <h4>Fecha inicial</h4>
+          <ion-datetime
+            presentation="date"
+            [(ngModel)]="startDate"
+            [max]="endDate || undefined"
+            mode="md"
+          ></ion-datetime>
+        </div>
+
+        <div class="cal">
+          <h4>Fecha final</h4>
+          <ion-datetime
+            presentation="date"
+            [(ngModel)]="endDate"
+            [min]="startDate || undefined"
+            mode="md"
+          ></ion-datetime>
+        </div>
+      </div>
+
+      <ion-button
+        expand="block"
+        color="primary"
+        (click)="apply()"
+        [disabled]="!startDate || !endDate"
+      >
+        Aplicar filtro
+      </ion-button>
+    </div>
+  </ng-template>
+</ion-modal>

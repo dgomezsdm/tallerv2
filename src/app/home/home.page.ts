@@ -22,13 +22,15 @@ import { addIcons } from 'ionicons';
 import { add, notifications, search } from 'ionicons/icons';
 
 // Importar componentes personalizados
-import { HeaderComponent } from './components/header/header.component';
+
 import {
   Appointment,
   CardItemComponent,
 } from './components/card-item/card-item.component';
 import { HomeService } from './services/home';
 import { AlertService } from '../shared/services/alert';
+import { DateFilterComponent } from './components/date-filter/date-filter.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 // Importar servicio
 
@@ -51,12 +53,29 @@ import { AlertService } from '../shared/services/alert';
     IonGrid,
     IonRow,
     IonCol,
-    HeaderComponent,
     CardItemComponent,
+    DateFilterComponent,
+    SearchBarComponent,
   ],
 })
 export class HomePage implements OnInit {
   items: any[] = [];
+
+  onSearch(term: string) {
+    console.log('Buscando:', term);
+    // Tu lógica de búsqueda aquí
+  }
+
+  onRangeSelected(range: { start: string; end: string }) {
+    console.log('Fecha inicio:', range.start);
+    console.log('Fecha fin:', range.end);
+    // Aplica tu filtro aquí
+  }
+
+  onClearSearch() {
+    console.log('Búsqueda limpiada');
+    // Resetear resultados
+  }
 
   appointments: Appointment[] = [
     {
@@ -242,6 +261,18 @@ export class HomePage implements OnInit {
       hour: '11:00:00',
     },
   ];
+
+  filteredAppointments: Appointment[] = this.appointments;
+
+  onDateRangeSelected(range: { start: string; end: string }) {
+    const start = new Date(range.start);
+    const end = new Date(range.end);
+
+    this.filteredAppointments = this.appointments.filter((ap) => {
+      const d = new Date(ap.date);
+      return d >= start && d <= end;
+    });
+  }
 
   openAppointment(ap: Appointment) {
     console.log('Clicked:', ap);

@@ -1,0 +1,18 @@
+.home-content {
+  --background: #f5f5f5;
+  padding: 12px;
+}
+
+.filter-container,
+.search-container {
+  margin-bottom: 12px;
+}
+
+ion-grid {
+  --ion-grid-padding: 0;
+}
+
+app-card-item {
+  display: block;
+  margin-bottom: 16px;
+}
