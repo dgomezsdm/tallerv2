@@ -19,6 +19,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  searchOutline,
   homeOutline,
   calendarOutline,
   homeSharp,
@@ -86,6 +87,7 @@ export class AppComponent {
 
   constructor() {
     addIcons({
+      searchOutline,
       homeOutline,
       calendarOutline,
       homeSharp,

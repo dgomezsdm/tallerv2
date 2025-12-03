@@ -27,10 +27,14 @@ import {
   Appointment,
   CardItemComponent,
 } from './components/card-item/card-item.component';
-import { HomeService } from './services/home';
+
 import { AlertService } from '../shared/services/alert';
 import { DateFilterComponent } from './components/date-filter/date-filter.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+import { SkeletonCardComponent } from '../shared/components/skeleton-card/skeleton-card.component';
+import { AppointmentPool } from './interface/appointmentPool.interface';
+import { HomeService } from './services/home-service';
 
 // Importar servicio
 
@@ -54,211 +58,101 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     CardItemComponent,
     DateFilterComponent,
     SearchBarComponent,
+    EmptyStateComponent,
+    SkeletonCardComponent,
   ],
 })
 export class HomePage implements OnInit {
-  items: any[] = [];
+  appointments: AppointmentPool[] = [];
+
+  loading = false;
+
+  constructor(
+    private alertServices: AlertService,
+    private appointmentService: HomeService
+  ) {
+    addIcons({ add, notifications, search });
+  }
+
+  ngOnInit() {
+    this.loadAppointments();
+  }
+
+  loadAppointments() {
+    this.loading = true;
+
+    const email = 'gferrando@sdm.com.do';
+    const workshop = 'zv02';
+
+    this.appointmentService.getAppointmentPool(email, workshop).subscribe({
+      next: (res) => {
+        console.log('Respuesta del servidor:', res);
+
+        // Filtrar appointments vacíos
+        this.appointments = res.filter((ap) => {
+          const isEmpty = this.isEmptyAppointment(ap);
+          console.log('¿Es vacío?', isEmpty, ap);
+          return !isEmpty;
+        });
+
+        console.log('Appointments filtrados:', this.appointments);
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  isEmptyAppointment(ap: any): boolean {
+    if (!ap) return true;
+
+    // Verificar campos críticos específicos
+    const hasValidData =
+      ap.clientNames && ap.clientSurnames && ap.date && ap.hour;
+
+    // Si no tiene datos válidos, es una cita vacía
+    if (!hasValidData) {
+      return true;
+    }
+
+    // Verificar si todos los valores son null/vacío/undefined
+    const allEmpty = Object.values(ap).every(
+      (v) => v === null || v === '' || v === undefined
+    );
+
+    return allEmpty;
+  }
+
+  onRangeSelected(range: { start: string; end: string }) {
+    this.loading = true;
+
+    this.appointmentService
+      .getAppointmentPoolByTwoDates(
+        'ledelossantos@sdm.com.do',
+        'zl02',
+        range.start,
+        range.end
+      )
+      .subscribe({
+        next: (res) => {
+          console.log('Respuesta por rango:', res);
+          this.appointments = res.filter((ap) => !this.isEmptyAppointment(ap));
+          console.log('Appointments filtrados:', this.appointments);
+          this.loading = false;
+        },
+        error: () => (this.loading = false),
+      });
+  }
 
   onSearch(term: string) {
     console.log('Buscando:', term);
     // Tu lógica de búsqueda aquí
   }
 
-  onRangeSelected(range: { start: string; end: string }) {
-    console.log('Fecha inicio:', range.start);
-    console.log('Fecha fin:', range.end);
-    // Aplica tu filtro aquí
-  }
-
   onClearSearch() {
     console.log('Búsqueda limpiada');
-    // Resetear resultados
   }
-
-  appointments: Appointment[] = [
-    {
-      numberOfAppointment: '000120410848',
-      clientCode: '1400043266',
-      clientNames: 'NATHALIE',
-      clientSurnames: 'JOMAR',
-      clientPhone: '829-312-5860',
-      chassis: 'MA3JC74W0S0210245',
-      brandCode: '03',
-      brandDescription: 'SUZUKI',
-      modelCode: '6N11BHH00019600',
-      email: 'njhp.02@gmail.com',
-      modelDescription: 'JIMNY 5DR GLX 4WD',
-      //lineCode: null,
-      //lineDescription: null,
-      //versionCode: '12',
-      //versionDescription: null,
-      vehicleYear: '2025',
-      date: '2025-12-03',
-      type: '0006',
-      typeDescription: 'Chequeo y Mantenimiento',
-      feeling: null,
-      crane: false,
-      home: false,
-      isEmergency: false,
-      hour: '08:00:00',
-    },
-    {
-      numberOfAppointment: '000120410975',
-      clientCode: '0000281007',
-      clientNames: 'KAROLIN',
-      clientSurnames: 'ELIZABETH',
-      clientPhone: '809-851-3926',
-      chassis: 'TSMYD21S2LM800316',
-      brandCode: '03',
-      brandDescription: 'SUZUKI',
-      modelCode: 'PK131XFAFDSDO',
-      email: 'KAROLIN.OVALLES@GMAIL.COM',
-      modelDescription: 'VITARA 2WD GL+ 1.6',
-      //lineCode: null,
-      //lineDescription: null,
-      //versionCode: '09',
-      //versionDescription: null,
-      vehicleYear: '2020',
-      date: '2025-12-03',
-      type: 'MANT',
-      typeDescription: 'Mantenimiento',
-      feeling: null,
-      crane: false,
-      home: false,
-      isEmergency: false,
-      hour: '08:30:00',
-    },
-    {
-      numberOfAppointment: '000120411029',
-      clientCode: '0000400176',
-      clientNames: 'AUTO REP. RODRIGUEZ MONTILLA SRL',
-      clientSurnames: '',
-      clientPhone: '809-880-6980',
-      chassis: 'JS3JB74V5T5100780',
-      brandCode: '03',
-      brandDescription: 'SUZUKI',
-      modelCode: '6GG1BHH00AX96',
-      email: 'auxdealer@grupomontilla.com',
-      modelDescription: 'JIMNY GLX 4WD',
-      //lineCode: null,
-      //lineDescription: null,
-      //versionCode: '12',
-      //versionDescription: null,
-      vehicleYear: '2026',
-      date: '2025-12-03',
-      type: '0008',
-      typeDescription: 'Chequeo',
-      feeling: null,
-      crane: false,
-      home: false,
-      isEmergency: false,
-      hour: '09:00:00',
-    },
-    {
-      numberOfAppointment: '000130272898',
-      clientCode: '0000235598',
-      clientNames: 'CONSTRUCTORA HERRERA (COHESA) SRL',
-      clientSurnames: '',
-      clientPhone: '809-534-8634',
-      chassis: '3GCUY9EL7NG201737',
-      brandCode: '02',
-      brandDescription: 'CHEVROLET',
-      modelCode: 'CK18543-G',
-      email: 'cohesa.kaoma@gmail.com',
-      modelDescription: 'SILVERADO HIGH COUNTRY',
-      //lineCode: null,
-      //lineDescription: null,
-      //versionCode: '25',
-      //versionDescription: null,
-      vehicleYear: '2022',
-      date: '2025-12-03',
-      type: '0008',
-      typeDescription: 'Chequeo',
-      feeling: null,
-      crane: false,
-      home: false,
-      isEmergency: false,
-      hour: '09:30:00',
-    },
-    {
-      numberOfAppointment: '000130273105',
-      clientCode: '0000242385',
-      clientNames: 'ARSENIO',
-      clientSurnames: 'RADAMES',
-      clientPhone: '809-910-0156',
-      chassis: '1GNSK8KT1PR246836',
-      brandCode: '02',
-      brandDescription: 'CHEVROLET',
-      modelCode: 'CK10706-L',
-      email: 'NO@HOTMAIL.COM',
-      modelDescription: 'TAHOE HC DIESEL 4X4',
-      //lineCode: null,
-      //lineDescription: null,
-      //versionCode: '25',
-      //versionDescription: null,
-      vehicleYear: '2023',
-      date: '2025-12-03',
-      type: '0009',
-      typeDescription: 'Mantenimiento regular',
-      feeling: null,
-      crane: false,
-      home: false,
-      isEmergency: false,
-      hour: '10:00:00',
-    },
-    {
-      numberOfAppointment: '000120411075',
-      clientCode: '0000285608',
-      clientNames: 'DALVI',
-      clientSurnames: 'RAMON',
-      clientPhone: '829-761-6994',
-      chassis: '3N6CD33BXZK440441',
-      brandCode: '01',
-      brandDescription: 'NISSAN',
-      modelCode: 'CVLNLWLD23IYP-----',
-      email: 'noellluberes7@gmail.com',
-      modelDescription: 'FRONTIER LE 4X4 2CAB',
-      //lineCode: null,
-      //lineDescription: null,
-      //versionCode: '12',
-      //versionDescription: null,
-      vehicleYear: '2022',
-      date: '2025-12-03',
-      type: '0006',
-      typeDescription: 'Chequeo y Mantenimiento',
-      feeling: null,
-      crane: false,
-      home: false,
-      isEmergency: false,
-      hour: '10:30:00',
-    },
-    {
-      numberOfAppointment: '000120410815',
-      clientCode: '0000205807',
-      clientNames: 'SEGURIDAD Y GARANTIA, SAS',
-      clientSurnames: '',
-      clientPhone: '809-547-1912',
-      chassis: '3N6CD33B0ZK475313',
-      brandCode: '01',
-      brandDescription: 'NISSAN',
-      modelCode: 'CVLNLEYD23FYP-J---',
-      email: 'lisbeth.aybar@segasa.com.do',
-      modelDescription: 'FRONTIER S 4X4 2CAB MT',
-      //lineCode: null,
-      //lineDescription: null,
-      //versionCode: '18',
-      //versionDescription: null,
-      vehicleYear: '2025',
-      date: '2025-12-03',
-      type: '0006',
-      typeDescription: 'Chequeo y Mantenimiento',
-      feeling: null,
-      crane: false,
-      home: false,
-      isEmergency: false,
-      hour: '11:00:00',
-    },
-  ];
 
   filteredAppointments: Appointment[] = this.appointments;
 
@@ -274,21 +168,6 @@ export class HomePage implements OnInit {
 
   openAppointment(ap: Appointment) {
     console.log('Clicked:', ap);
-  }
-
-  constructor(
-    private homeService: HomeService,
-    private alertServices: AlertService
-  ) {
-    addIcons({ add, notifications, search });
-  }
-
-  ngOnInit() {
-    this.loadData();
-  }
-
-  loadData() {
-    this.items = this.homeService.getItems();
   }
 
   onItemClick(item: any) {

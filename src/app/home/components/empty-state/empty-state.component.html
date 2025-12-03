@@ -1,0 +1,13 @@
+<div class="empty-container">
+  <ion-icon [name]="icon"></ion-icon>
+
+  <h2>{{ title }}</h2>
+
+  @if (message) {
+  <p>{{ message }}</p>
+  } @if (actionText) {
+  <ion-button expand="block" shape="round" color="primary" (click)="onAction()">
+    {{ actionText }}
+  </ion-button>
+  }
+</div>

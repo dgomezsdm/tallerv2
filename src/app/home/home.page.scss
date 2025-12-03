@@ -16,3 +16,21 @@ app-card-item {
   display: block;
   margin-bottom: 16px;
 }
+
+
+.card-fade-in {
+  animation: fadeSlideIn 0.35s ease;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

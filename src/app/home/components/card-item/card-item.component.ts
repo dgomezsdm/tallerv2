@@ -51,19 +51,9 @@ export interface Appointment {
   templateUrl: './card-item.component.html',
   styleUrls: ['./card-item.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
-
-    IonIcon,
-  ],
+  imports: [CommonModule, IonCard, IonCardContent, IonIcon],
 })
 export class CardItemComponent {
-  // El item ahora es un Appointment tipado fuertemente
   @Input() appointment!: Appointment;
 
   @Output() itemClick = new EventEmitter<Appointment>();

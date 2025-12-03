@@ -1,0 +1,40 @@
+.skeleton-card {
+  border-radius: 18px;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e0e0e0, #f5f5f5, #e0e0e0);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+
+.skeleton-title {
+  height: 18px;
+  width: 60%;
+  margin-bottom: 8px;
+}
+
+.skeleton-subtitle {
+  height: 14px;
+  width: 40%;
+}
+
+.skeleton-row {
+  height: 14px;
+  width: 80%;
+  margin: 10px 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

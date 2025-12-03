@@ -23,21 +23,43 @@
     ></app-search-bar>
   </div>
 
-  <!-- Grid de cards -->
+  <!-- LISTA DE SKELETONS -->
+  @if (loading) {
   <ion-grid fixed>
     <ion-row>
-      <ion-col
-        size="12"
-        size-sm="6"
-        size-md="4"
-        size-lg="3"
-        *ngFor="let ap of appointments"
-      >
+      @for (i of [1,2,3,4,5,6,7,8]; track i) {
+      <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+        <app-skeleton-card></app-skeleton-card>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+  }
+
+  <!-- CARDS -->
+  @if (!loading && appointments.length > 0) {
+  <ion-grid fixed>
+    <ion-row>
+      @for (ap of appointments; track ap.numberOfAppointment) {
+      <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
         <app-card-item
           [appointment]="ap"
           (itemClick)="openAppointment(ap)"
         ></app-card-item>
       </ion-col>
+      }
     </ion-row>
   </ion-grid>
+  }
+
+  <!-- EMPTY STATE -->
+  @if (!loading && appointments.length === 0) {
+  <app-empty-state
+    icon="search-outline"
+    title="No encontramos citas"
+    message="Intenta cambiar el rango de fechas o filtrar nuevamente."
+    actionText="Recargar"
+    (action)="loadAppointments()"
+  ></app-empty-state>
+  }
 </ion-content>
