@@ -9,8 +9,42 @@ import {
   IonButton,
   IonIcon,
 } from '@ionic/angular/standalone';
+
 import { addIcons } from 'ionicons';
-import { chevronForward } from 'ionicons/icons';
+import {
+  chevronForward,
+  timeOutline,
+  calendarOutline,
+  callOutline,
+  carOutline,
+  hammerOutline,
+} from 'ionicons/icons';
+
+// =============================
+//   INTERFACE PARA EL JSON
+// =============================
+export interface Appointment {
+  numberOfAppointment: string;
+  clientCode: string;
+  clientNames: string;
+  clientSurnames: string;
+  clientPhone: string;
+  chassis: string;
+  brandCode: string;
+  brandDescription: string;
+  modelCode: string;
+  modelDescription: string;
+  email: string;
+  vehicleYear: string;
+  date: string;
+  type: string;
+  typeDescription: string;
+  feeling: any;
+  crane: boolean;
+  home: boolean;
+  isEmergency: boolean;
+  hour: string;
+}
 
 @Component({
   selector: 'app-card-item',
@@ -24,19 +58,28 @@ import { chevronForward } from 'ionicons/icons';
     IonCardTitle,
     IonCardSubtitle,
     IonCardContent,
-    IonButton,
+
     IonIcon,
   ],
 })
 export class CardItemComponent {
-  @Input() item: any;
-  @Output() itemClick = new EventEmitter<any>();
+  // El item ahora es un Appointment tipado fuertemente
+  @Input() appointment!: Appointment;
+
+  @Output() itemClick = new EventEmitter<Appointment>();
 
   constructor() {
-    addIcons({ chevronForward });
+    addIcons({
+      chevronForward,
+      timeOutline,
+      calendarOutline,
+      callOutline,
+      carOutline,
+      hammerOutline,
+    });
   }
 
   onCardClick() {
-    this.itemClick.emit(this.item);
+    this.itemClick.emit(this.appointment);
   }
 }

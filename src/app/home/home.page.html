@@ -23,8 +23,11 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let item of items">
-        <app-card-item [item]="item" (itemClick)="onItemClick($event)">
-        </app-card-item>
+        <app-card-item
+          *ngFor="let ap of appointments"
+          [appointment]="ap"
+          (itemClick)="openAppointment(ap)"
+        ></app-card-item>
       </ion-col>
     </ion-row>
   </ion-grid>

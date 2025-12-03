@@ -35,3 +35,69 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+/* ===== Toast General ===== */
+.mustard-toast {
+  --border-radius: 14px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --min-height: 48px;
+  --background: #323232;
+  --color: white;
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+/* ===== Iconos según tipo ===== */
+.mustard-toast.info::before,
+.mustard-toast.success::before,
+.mustard-toast.error::before,
+.mustard-toast.warning::before {
+  font-family: 'Ionicons';
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+/* Icono info */
+.mustard-toast.info::before {
+  content: "\f1c2";
+  /* information-circle-outline */
+}
+
+/* Icono success */
+.mustard-toast.success::before {
+  content: "\f2bc";
+  /* checkmark-circle-outline */
+}
+
+/* Icono warning */
+.mustard-toast.warning::before {
+  content: "\f3fc";
+  /* warning-outline */
+}
+
+/* Icono error */
+.mustard-toast.error::before {
+  content: "\f2d7";
+  /* close-circle-outline */
+}
+
+/* ===== Colores personalizados ===== */
+.mustard-toast.info {
+  --background: #1976d2;
+}
+
+.mustard-toast.success {
+  --background: #2e7d32;
+}
+
+.mustard-toast.warning {
+  --background: #ed6c02;
+}
+
+.mustard-toast.error {
+  --background: #d32f2f;
+}
