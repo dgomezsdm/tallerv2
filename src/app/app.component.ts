@@ -19,6 +19,11 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  hammerOutline,
+  chevronForward,
+  callOutline,
+  carOutline,
+  timeOutline,
   searchOutline,
   homeOutline,
   calendarOutline,
@@ -87,6 +92,11 @@ export class AppComponent {
 
   constructor() {
     addIcons({
+      hammerOutline,
+      chevronForward,
+      callOutline,
+      carOutline,
+      timeOutline,
       searchOutline,
       homeOutline,
       calendarOutline,

@@ -18,5 +18,6 @@ export interface AppointmentPool {
   crane: boolean;
   home: boolean;
   isEmergency: boolean;
-  hour: string;
+  hour?: string;
+  hora?: string;
 }

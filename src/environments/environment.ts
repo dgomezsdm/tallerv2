@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  APIUrl: 'https://workshopreceptiondev.azurewebsites.net/api/',
+  APIUrl: 'https://workshopreceptionprod.azurewebsites.net/api/',
   nodeMail: 'https://nodeback.azurewebsites.net',
   nestMiddleWare: 'https://sdm-nestmiddleware-prod.azurewebsites.net/',
   clientMail: 'dgomez@sdm.com.do',
