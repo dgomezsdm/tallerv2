@@ -1,14 +1,45 @@
-ion-searchbar {
-  --background: var(--ion-color-light);
-  --border-radius: 24px;
-  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --placeholder-color: var(--ion-color-medium);
+// .material-search-bar {
+//   --background: rgba(0, 0, 0, 0.06);
+//   --border-radius: 12px;
+//   --color: var(--ion-color-dark);
+//   --placeholder-color: var(--ion-color-medium);
+//   --icon-color: var(--ion-color-medium);
+//   --clear-button-color: var(--ion-color-medium);
+
+//   padding: 4px 8px;
+
+//   &::part(container) {
+//     border-radius: 12px;
+//     border: none;
+//   }
+
+//   &:focus-within::part(container) {
+//     background: rgba(0, 0, 0, 0.10);
+//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+//   }
+// }
+.search-wrapper {
+  position: relative;
+}
+
+ion-searchbar.md-filled {
+  --background: #fff;
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  --border-radius: 12px;
   --icon-color: var(--ion-color-medium);
-  --clear-button-color: var(--ion-color-medium);
+  --placeholder-color: var(--ion-color-medium);
+}
 
-  padding: 8px 16px;
+.search-loading {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.7;
+}
 
-  &::part(container) {
-    border-radius: 24px;
-  }
+.search-loading ion-spinner {
+  width: 20px;
+  height: 20px;
 }

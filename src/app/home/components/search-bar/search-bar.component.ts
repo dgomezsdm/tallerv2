@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { IonSearchbar, IonIcon } from '@ionic/angular/standalone';
+import { IonSearchbar, IonIcon, IonSpinner } from '@ionic/angular/standalone';
 
 import { search, close } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -12,7 +12,7 @@ import { addIcons } from 'ionicons';
   standalone: true,
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
-  imports: [CommonModule, FormsModule, IonSearchbar],
+  imports: [IonSpinner, CommonModule, FormsModule, IonSearchbar],
 })
 export class SearchBarComponent {
   @Input() placeholder: string = 'Buscar...';
@@ -21,6 +21,7 @@ export class SearchBarComponent {
   @Output() searchClear = new EventEmitter<void>();
 
   searchTerm: string = '';
+  isLoading = false;
 
   constructor() {
     addIcons({ search, close });
@@ -29,6 +30,13 @@ export class SearchBarComponent {
   onSearchChange(event: any) {
     this.searchTerm = event.detail.value || '';
     this.searchChange.emit(this.searchTerm);
+
+    this.isLoading = true;
+
+    setTimeout(() => {
+      // tu lógica de filtro/búsqueda aquí
+      this.isLoading = false;
+    }, 900); // simula de
   }
 
   onClear() {

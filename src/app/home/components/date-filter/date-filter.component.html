@@ -1,9 +1,14 @@
 <!-- <ion-button expand="block" color="primary" (click)="openSheet()">
   Seleccionar rango de fechas
 </ion-button> -->
-
+<!--
 <ion-button (click)="openSheet()" fill="clear">
   <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+</ion-button> -->
+
+<ion-button (click)="openSheet()" fill="clear" aria-label="Filtrar por fecha">
+  <ion-icon slot="start" name="calendar-outline"></ion-icon>
+  <span>Filtrar</span>
 </ion-button>
 
 <ion-modal

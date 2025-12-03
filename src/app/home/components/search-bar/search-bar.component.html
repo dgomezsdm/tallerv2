@@ -2,22 +2,29 @@
   [(ngModel)]="searchTerm"
   [placeholder]="placeholder"
   [debounce]="debounce"
-  (ionInput)="onSearchChange($event)"
-  (ionClear)="onClear()"
-  mode="ios"
-  animated="true"
-  showClearButton="focus"
-  search-icon="search"
-  clear-icon="close"
-></ion-searchbar> -->
-<ion-searchbar
-  [(ngModel)]="searchTerm"
-  [placeholder]="placeholder"
-  [debounce]="debounce"
   (ionInput)="onSearchChange($event.target.value)"
   (ionClear)="onClear()"
-  mode="ios"
-  animated
+  mode="md"
   showClearButton="focus"
+  animated="true"
+  class="material-search-bar"
 >
-</ion-searchbar>
+</ion-searchbar> -->
+
+<div class="search-wrapper">
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    [placeholder]="placeholder"
+    [debounce]="debounce"
+    (ionInput)="onSearchChange($event.target.value)"
+    (ionClear)="onClear()"
+    mode="md"
+    class="md-filled"
+    show-clear-button="focus"
+  ></ion-searchbar>
+
+  <!-- Loader dentro del Searchbar -->
+  <div class="search-loading" *ngIf="isLoading">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+</div>

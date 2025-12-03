@@ -48,8 +48,6 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     IonToolbar,
     IonButtons,
     IonMenuButton,
-    IonButton,
-    IonIcon,
     IonGrid,
     IonRow,
     IonCol,

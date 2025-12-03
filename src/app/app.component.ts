@@ -20,6 +20,7 @@ import {
 import { addIcons } from 'ionicons';
 import {
   homeOutline,
+  calendarOutline,
   homeSharp,
   mailOutline,
   mailSharp,
@@ -86,6 +87,7 @@ export class AppComponent {
   constructor() {
     addIcons({
       homeOutline,
+      calendarOutline,
       homeSharp,
       mailOutline,
       mailSharp,

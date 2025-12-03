@@ -4,26 +4,15 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Home</ion-title>
+    <ion-title>Citas del dia</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
-      </ion-button>
-      <!-- <ion-button fill="clear">
-        <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
-      </ion-button> -->
       <date-filter (rangeSelected)="onRangeSelected($event)"></date-filter>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="home-content">
-  <!-- Filtro de fecha -->
-  <!-- <div class="filter-container">
-    <date-filter (rangeSelected)="onRangeSelected($event)"></date-filter>
-  </div> -->
-
   <!-- Searchbar -->
   <div class="search-container">
     <app-search-bar
