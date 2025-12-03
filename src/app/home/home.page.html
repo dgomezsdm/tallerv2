@@ -16,8 +16,8 @@
   <!-- Searchbar -->
   <div class="search-container">
     <app-search-bar
-      placeholder="Buscar productos..."
-      [debounce]="500"
+      placeholder="Buscar por nombre, teléfono, chassis..."
+      [debounce]="300"
       (searchChange)="onSearch($event)"
       (searchClear)="onClearSearch()"
     ></app-search-bar>
@@ -36,11 +36,11 @@
   </ion-grid>
   }
 
-  <!-- CARDS -->
-  @if (!loading && appointments.length > 0) {
+  <!-- CARDS - ✅ USAR filteredAppointments -->
+  @if (!loading && filteredAppointments.length > 0) {
   <ion-grid fixed>
     <ion-row>
-      @for (ap of appointments; track ap.numberOfAppointment) {
+      @for (ap of filteredAppointments; track ap.numberOfAppointment) {
       <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
         <app-card-item
           [appointment]="ap"
@@ -52,12 +52,12 @@
   </ion-grid>
   }
 
-  <!-- EMPTY STATE -->
-  @if (!loading && appointments.length === 0) {
+  <!-- EMPTY STATE - ✅ USAR filteredAppointments -->
+  @if (!loading && filteredAppointments.length === 0) {
   <app-empty-state
     icon="search-outline"
     title="No encontramos citas"
-    message="Intenta cambiar el rango de fechas o filtrar nuevamente."
+    message="Intenta cambiar el rango de fechas o el término de búsqueda."
     actionText="Recargar"
     (action)="loadAppointments()"
   ></app-empty-state>

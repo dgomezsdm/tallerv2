@@ -3,7 +3,7 @@
     [(ngModel)]="searchTerm"
     [placeholder]="placeholder"
     [debounce]="debounce"
-    (ionInput)="onSearchChange($event.target.value)"
+    (ionInput)="onSearchChange($event)"
     (ionClear)="onClear()"
     mode="md"
     class="md-filled"

@@ -12,31 +12,25 @@ import { addIcons } from 'ionicons';
   standalone: true,
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
-  imports: [IonSpinner, CommonModule, FormsModule, IonSearchbar],
+  imports: [CommonModule, FormsModule, IonSearchbar, IonSpinner],
 })
 export class SearchBarComponent {
   @Input() placeholder: string = 'Buscar...';
   @Input() debounce: number = 300;
+  @Input() isLoading: boolean = false; // ✅ Agregado
   @Output() searchChange = new EventEmitter<string>();
   @Output() searchClear = new EventEmitter<void>();
 
   searchTerm: string = '';
-  isLoading = false;
 
   constructor() {
     addIcons({ search, close });
   }
 
   onSearchChange(event: any) {
-    this.searchTerm = event.detail.value || '';
+    const value = event?.detail?.value ?? event?.target?.value ?? '';
+    this.searchTerm = value;
     this.searchChange.emit(this.searchTerm);
-
-    this.isLoading = true;
-
-    setTimeout(() => {
-      // tu lógica de filtro/búsqueda aquí
-      this.isLoading = false;
-    }, 900); // simula de
   }
 
   onClear() {
