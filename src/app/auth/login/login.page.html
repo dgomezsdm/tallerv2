@@ -49,8 +49,8 @@
               placeholder="Elige tu taller"
               required
             >
-              <ion-select-option *ngFor="let t of workshops" [value]="t.id">
-                {{ t.name }}
+              <ion-select-option *ngFor="let t of workshops" [value]="t.taller">
+                {{ t.descripcion }}
               </ion-select-option>
             </ion-select>
           </ion-item>
