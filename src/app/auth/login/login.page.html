@@ -1,24 +1,21 @@
 <ion-content class="login-content">
   <div class="login-wrapper">
     <div class="login-container">
-      <!-- Logo Section -->
-      <div class="logo-section">
-        <div class="logo-circle">
-          <ion-icon name="hammer-outline"></ion-icon>
-          <img src="../../../assets/Logo_SDM_100.png" />
-        </div>
-        <h1 class="app-title">Sistema de Talleres</h1>
+      <!-- Logo -->
+      <div class="logo-container">
+        <img src="assets/Logo_SDM_100.png" class="logo-img" />
       </div>
 
-      <!-- Welcome Text -->
+      <!-- Titles -->
       <div class="welcome-section">
+        <h1 class="app-title">Sistema de Talleres</h1>
         <h2 class="title">Bienvenido</h2>
         <p class="subtitle">Inicia sesión para continuar</p>
       </div>
 
-      <!-- Form -->
+      <!-- Login Form -->
       <form (ngSubmit)="onLogin()" class="login-form">
-        <!-- Email Input -->
+        <!-- Email -->
         <div class="input-group">
           <ion-item lines="none" class="input-item">
             <ion-icon
@@ -32,12 +29,11 @@
               [(ngModel)]="email"
               name="email"
               required
-              autocomplete="email"
             ></ion-input>
           </ion-item>
         </div>
 
-        <!-- Workshop Select -->
+        <!-- Workshop -->
         <div class="input-group">
           <ion-item lines="none" class="input-item">
             <ion-icon
@@ -46,10 +42,10 @@
               class="input-icon"
             ></ion-icon>
             <ion-label position="floating">Seleccionar taller</ion-label>
+
             <ion-select
               [(ngModel)]="selectedWorkshop"
               name="workshop"
-              interface="action-sheet"
               placeholder="Elige tu taller"
               required
             >
@@ -60,7 +56,7 @@
           </ion-item>
         </div>
 
-        <!-- Login Button -->
+        <!-- Button -->
         <ion-button
           expand="block"
           shape="round"
