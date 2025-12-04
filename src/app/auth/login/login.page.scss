@@ -1,0 +1,266 @@
+// ===================================
+// FORZAR VISIBILIDAD (Importante)
+// ===================================
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+ion-content {
+  --background: #ffffff !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+ion-content>div {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+// ===================================
+// ESTILOS DEL LOGIN
+// ===================================
+
+.login-content {
+  --background: linear-gradient(135deg, #f99407 0%, #dd6d02 50%, #b74b06 100%);
+}
+
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow: 0 20px 60px rgba(221, 109, 2, 0.25);
+  animation: slideUp 0.6s ease-out;
+  margin: auto;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ===================================
+// LOGO SECTION
+// ===================================
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, #f99407 0%, #dd6d02 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(249, 148, 7, 0.4);
+
+  ion-icon {
+    font-size: 40px;
+    color: white;
+  }
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #f99407;
+  margin: 0;
+}
+
+// ===================================
+// WELCOME SECTION
+// ===================================
+
+.welcome-section {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #461702;
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #94390c;
+  margin: 0;
+}
+
+// ===================================
+// FORM
+// ===================================
+
+.login-form {
+  margin-bottom: 24px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-item {
+  --background: #fffaeb;
+  --border-radius: 14px;
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  --min-height: 56px;
+  border-radius: 14px;
+  border: 1px solid #ffe188;
+  transition: all 0.3s ease;
+
+  &.item-has-focus {
+    --background: #ffffff;
+    box-shadow: 0 4px 12px rgba(249, 148, 7, 0.15);
+    border: 2px solid #f99407;
+  }
+
+  ion-label {
+    font-weight: 500;
+    color: #94390c;
+    font-size: 14px;
+  }
+
+  ion-input,
+  ion-select {
+    font-size: 15px;
+    font-weight: 500;
+    color: #461702;
+  }
+}
+
+.input-icon {
+  font-size: 22px;
+  color: #f99407;
+  margin-right: 12px;
+}
+
+// ===================================
+// BUTTON
+// ===================================
+
+.login-btn {
+  --background: linear-gradient(135deg, #f99407 0%, #dd6d02 100%);
+  --background-hover: linear-gradient(135deg, #dd6d02 0%, #b74b06 100%);
+  --border-radius: 14px;
+  --box-shadow: 0 8px 24px rgba(249, 148, 7, 0.35);
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+
+  height: 56px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+
+  ion-icon {
+    margin-right: 8px;
+    font-size: 20px;
+  }
+
+  &:hover:not([disabled]) {
+    transform: translateY(-2px);
+    --box-shadow: 0 12px 32px rgba(249, 148, 7, 0.45);
+  }
+
+  &:active:not([disabled]) {
+    transform: translateY(0);
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ===================================
+// FOOTER
+// ===================================
+
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.footer-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #94390c;
+  margin: 0;
+
+  ion-icon {
+    font-size: 16px;
+    margin-right: 6px;
+    color: #f99407;
+  }
+}
+
+// ===================================
+// RESPONSIVE
+// ===================================
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 32px 24px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .logo-circle {
+    width: 70px;
+    height: 70px;
+
+    ion-icon {
+      font-size: 36px;
+    }
+  }
+}
+
+// ===================================
+// MEJOR CENTRADO VERTICAL
+// ===================================
+
+@media (min-height: 600px) {
+  .login-wrapper {
+    padding: 60px 20px;
+  }
+}
+
+@media (min-height: 800px) {
+  .login-wrapper {
+    padding: 80px 20px;
+  }
+}
