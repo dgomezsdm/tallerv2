@@ -407,6 +407,7 @@ import { EmptyStateComponent } from './components/empty-state/empty-state.compon
 import { SkeletonCardComponent } from '../shared/components/skeleton-card/skeleton-card.component';
 import { AppointmentPool } from './interface/appointmentPool.interface';
 import { HomeService } from './services/home-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -443,7 +444,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private alertServices: AlertService,
-    private appointmentService: HomeService
+    private appointmentService: HomeService,
+    private router: Router
   ) {
     addIcons({ add, notifications, search });
   }
@@ -589,5 +591,6 @@ export class HomePage implements OnInit {
 
   openAppointment(ap: AppointmentPool) {
     console.log('Clicked:', ap);
+    this.router.navigate(['/app/check-in']);
   }
 }

@@ -54,6 +54,11 @@ export const routes: Routes = [
         loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
       },
       {
+        path: 'check-in',
+        loadComponent: () =>
+          import('./check-in/check-in.page').then((m) => m.CheckInPage),
+      },
+      {
         path: 'folder/:id',
         loadComponent: () =>
           import('./folder/folder.page').then((m) => m.FolderPage),
@@ -65,4 +70,8 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'login',
   },
+  // {
+  //   path: 'check-in',
+  //   loadComponent: () => import('./check-in/check-in.page').then( m => m.CheckInPage)
+  // },
 ];
