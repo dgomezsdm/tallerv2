@@ -273,29 +273,29 @@
 }
 
 /** Modo oscuro (opcional) **/
-@media (prefers-color-scheme: dark) {
-  body.dark {
-    --ion-color-primary: #ffb620;
-    --ion-color-primary-rgb: 255, 182, 32;
-    --ion-color-primary-contrast: #000000;
-    --ion-color-primary-contrast-rgb: 0, 0, 0;
-    --ion-color-primary-shade: #e0a01c;
-    --ion-color-primary-tint: #ffbd36;
+// @media (prefers-color-scheme: dark) {
+//   body.dark {
+//     --ion-color-primary: #ffb620;
+//     --ion-color-primary-rgb: 255, 182, 32;
+//     --ion-color-primary-contrast: #000000;
+//     --ion-color-primary-contrast-rgb: 0, 0, 0;
+//     --ion-color-primary-shade: #e0a01c;
+//     --ion-color-primary-tint: #ffbd36;
 
-    --ion-background-color: #461702;
-    --ion-background-color-rgb: 70, 23, 2;
+//     --ion-background-color: #461702;
+//     --ion-background-color-rgb: 70, 23, 2;
 
-    --ion-text-color: #fffaeb;
-    --ion-text-color-rgb: 255, 250, 235;
+//     --ion-text-color: #fffaeb;
+//     --ion-text-color-rgb: 255, 250, 235;
 
-    --ion-card-background: #592e1b;
-    --ion-item-background: #592e1b;
-    --ion-toolbar-background: #7a300d;
-    --ion-tab-bar-background: #592e1b;
+//     --ion-card-background: #592e1b;
+//     --ion-item-background: #592e1b;
+//     --ion-toolbar-background: #7a300d;
+//     --ion-tab-bar-background: #592e1b;
 
-    --ion-border-color: #94390c;
-  }
-}
+//     --ion-border-color: #94390c;
+//   }
+// }
 
 /** Estilos adicionales para componentes específicos **/
 ion-toolbar {

@@ -1,10 +1,59 @@
 <ion-split-pane contentId="main-content">
   <ion-menu contentId="main-content" type="overlay">
-    <ion-content>
-      <ion-list id="inbox-list">
-        <ion-list-header>Inbox</ion-list-header>
-        <ion-note>hi&#64;ionicframework.com</ion-note>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="goToProfile()">
+            <ion-icon
+              slot="icon-only"
+              ios="person-circle-outline"
+              md="person-circle-outline"
+            ></ion-icon>
+          </ion-button>
+        </ion-buttons>
 
+        <ion-title>Menú</ion-title>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="goToSettings()">
+            <ion-icon
+              slot="icon-only"
+              ios="settings-outline"
+              md="settings-outline"
+            ></ion-icon>
+          </ion-button>
+          <ion-button (click)="onLogout()">
+            <ion-icon
+              slot="icon-only"
+              ios="log-out-outline"
+              md="log-out-outline"
+            ></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list id="user-info-list" lines="none">
+        <ion-item>
+          <ion-avatar slot="start" [style.backgroundColor]="getAvatarColor()">
+            <p class="initials">{{ userInitials }}</p>
+          </ion-avatar>
+
+          <ion-label>
+            <h2>{{ userName || 'Cargando...' }}</h2>
+            <p>{{ userEmail || 'Sin Email' }}</p>
+            @if (workshopName) {
+            <ion-note color="medium" style="margin-top: 4px; display: block"
+              >{{ workshopName }}</ion-note
+            >
+            }
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list id="inbox-list">
+        <ion-list-header>Navegación</ion-list-header>
         @for (p of appPages; track p; let i = $index) {
         <ion-menu-toggle auto-hide="false">
           <ion-item
@@ -26,8 +75,8 @@
         }
       </ion-list>
 
-      <ion-list id="labels-list">
-        <ion-list-header>Labels</ion-list-header>
+      <!-- <ion-list id="labels-list">
+        <ion-list-header>Etiquetas</ion-list-header>
 
         @for (label of labels; track label) {
         <ion-item lines="none">
@@ -40,7 +89,7 @@
           <ion-label>{{ label }}</ion-label>
         </ion-item>
         }
-      </ion-list>
+      </ion-list> -->
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="main-content"></ion-router-outlet>

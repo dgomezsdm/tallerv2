@@ -1,0 +1,33 @@
+/*
+ * Centrar las iniciales dentro del ion-avatar
+ */
+ion-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  /* Color del texto de las iniciales */
+  font-weight: 600;
+  font-size: 1.2em;
+  /* Tamaño de las iniciales */
+}
+
+ion-avatar .initials {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+/* Opcional: Estilos para la sección de información del usuario */
+#user-info-list ion-item {
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --inner-padding-end: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#user-info-list h2 {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
