@@ -1,13 +1,159 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>checkIn</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <h5 class="headerTitle">Recepción Check-in</h5>
+    <ion-buttons slot="end">
+      <ion-icon
+        name="close-outline"
+        class="golden-text-950"
+        style="font-size: 1.8rem"
+        (click)="presentAlert()"
+      ></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">checkIn</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="golden-bg-50">
+  <div class="main-content">
+    <form *ngIf="cita">
+      <!-- SECCIÓN DE INFO DEL CLIENTE -->
+      <div class="userInfo ion-padding-vertical golden-bg-500">
+        <ion-icon
+          style="font-size: 4rem"
+          name="person-circle-outline"
+          class="golden-text-950"
+        ></ion-icon>
+        <span class="UserName">
+          {{cita.clientNames | titlecase}} {{cita.clientSurnames | titlecase}}
+        </span>
+        <span class="dateInfo golden-text-950">
+          Cita #{{cita.numberOfAppointment}}
+        </span>
+      </div>
+
+      <!-- CONTENIDO PRINCIPAL: CHASSIS, SERVICIOS, ETC. -->
+      <div class="form-container">
+        <!-- TARJETA 1: CHASSIS -->
+        <ion-card class="serviceCard">
+          <label for="type" class="serviceSubTitle golden-text-950"
+            >Chassis</label
+          >
+          <ion-item lines="none" class="ion-no-padding">
+            <ion-input
+              class="serviceTitle"
+              [value]="cita.chassis"
+              placeholder="Chassis vehículo"
+              [disabled]="verificateChassis"
+              [(ngModel)]="writedChassis"
+              [ngModelOptions]="{standalone: true}"
+            ></ion-input>
+            <ion-button
+              [color]="verificateChassis === true ? 'success' : 'secondary'"
+              [disabled]="verificateChassis"
+              (click)="hasChassis(writedChassis)"
+              class="ion-margin-start"
+            >
+              {{ verificateChassis === true ? 'Válido' : 'Validar'}}
+            </ion-button>
+          </ion-item>
+        </ion-card>
+
+        <!-- TARJETA 2: SERVICIOS -->
+        <ion-card class="serviceCard services-card">
+          <label for="service" class="serviceSubTitle golden-text-950"
+            >Servicios</label
+          >
+          <ion-list class="ion-no-padding" lines="full">
+            <ion-item *ngFor="let s of cita.services" class="service-item">
+              <span class="serviceTitle ion-text-wrap">
+                {{s.serviceNumber}}: {{s.serviceDescription | lowercase |
+                titlecase}}
+              </span>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+
+        <!-- TARJETA 3: TIPO DE CITA -->
+        <ion-card class="serviceCard">
+          <label for="type" class="serviceSubTitle golden-text-950"
+            >Tipo de Cita</label
+          >
+          <span class="serviceTitle">{{cita.typeDescription}}</span>
+        </ion-card>
+
+        <!-- TARJETA 4 & 5: CAMPAÑAS Y MANTENIMIENTOS (FLEX ROW) -->
+        <div class="card-row">
+          <ion-card class="serviceCard-row">
+            <div class="ion-align-items-center">
+              <span class="serviceTitle golden-text-950">Campañas activas</span>
+            </div>
+            <div>
+              <ion-button fill="clear" color="tertiary" (click)="openModal()">
+                <ion-badge color="warning" slot="start"
+                  >{{cita.vehicleCampaigns.length}}</ion-badge
+                >
+                <ion-icon name="notifications" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-card>
+
+          <ion-card class="serviceCard-row">
+            <div class="ion-align-items-center">
+              <span class="serviceTitle golden-text-950">Mant. anteriores</span>
+            </div>
+            <div>
+              <ion-button
+                fill="clear"
+                color="tertiary"
+                (click)="openMantModal()"
+              >
+                <ion-icon name="build-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-card>
+        </div>
+
+        <!-- TOGGLES DE OPCIONES -->
+        <ion-card class="serviceCard ion-margin-top toggle-group">
+          <div class="selectBox">
+            <h6 class="serviceTitle golden-text-950">Recepción a domicilio</h6>
+            <ion-toggle
+              color="primary"
+              [(ngModel)]="home"
+              [ngModelOptions]="{standalone: true}"
+            ></ion-toggle>
+          </div>
+
+          <div class="selectBox">
+            <h6 class="serviceTitle golden-text-950">Vehículo en grúa</h6>
+            <ion-toggle
+              color="primary"
+              [(ngModel)]="crane"
+              [ngModelOptions]="{standalone: true}"
+            ></ion-toggle>
+          </div>
+
+          <div class="selectBox">
+            <h6 class="serviceTitle golden-text-950">Vehículo en emergencia</h6>
+            <ion-toggle
+              color="primary"
+              [(ngModel)]="isEmergency"
+              [ngModelOptions]="{standalone: true}"
+            ></ion-toggle>
+          </div>
+        </ion-card>
+
+        <!-- BOTÓN DE ACCIÓN -->
+        <ion-button
+          expand="block"
+          color="tertiary"
+          class="btn-start"
+          type="submit"
+          [disabled]="!canStart"
+          (click)="next()"
+        >
+          <span class="Lable">Iniciar Recepción</span>
+        </ion-button>
+      </div>
+    </form>
+  </div>
 </ion-content>

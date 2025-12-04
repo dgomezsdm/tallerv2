@@ -46,6 +46,9 @@ import {
   personSharp,
   settingsOutline,
   settingsSharp,
+  closeOutline,
+  notifications,
+  buildOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -93,6 +96,9 @@ export class AppComponent {
 
   constructor() {
     addIcons({
+      closeOutline,
+      notifications,
+      buildOutline,
       hammerOutline,
       chevronForward,
       callOutline,

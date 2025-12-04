@@ -1,0 +1,141 @@
+  .main-content {
+    padding: 0 16px;
+  }
+
+  .form-container {
+    padding: 16px 0;
+  }
+
+  .headerTitle {
+    color: var(--ion-color-primary-contrast);
+    font-weight: 700;
+    margin-left: 16px;
+  }
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 16px;
+    background: var(--ion-color-primary);
+    /* Usa el color primario */
+    border-radius: 0 0 30px 30px;
+    /* Borde inferior redondeado */
+    box-shadow: var(--ion-box-shadow-color) 0px 4px 16px;
+  }
+
+  .UserName {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ion-color-primary-contrast);
+    margin-top: 8px;
+  }
+
+  .dateInfo {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  .serviceCard,
+  .serviceCard-row {
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: var(--ion-card-background);
+  }
+
+  .serviceSubTitle {
+    display: block;
+    font-weight: 600;
+    color: var(--ion-color-medium);
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
+
+  .serviceTitle {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--ion-text-color);
+  }
+
+  /* Estilos para el Input de Chassis */
+  ion-input {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-bottom: 0;
+    --padding-top: 0;
+    font-weight: 600;
+  }
+
+  /* Tarjeta de Servicios (scrollable) */
+  .services-card {
+    max-height: 18rem;
+    /* Limita la altura de la tarjeta de servicios */
+    overflow-y: auto;
+    /* Permite el scroll */
+  }
+
+  .service-item {
+    --inner-padding-end: 0;
+    --padding-start: 0;
+    --background: transparent;
+  }
+
+  /* Toggles */
+  .toggle-group {
+    padding: 5px 15px;
+  }
+
+  .selectBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--ion-border-color);
+  }
+
+  .selectBox:last-child {
+    border-bottom: none;
+  }
+
+  /* Botón de Iniciar */
+  .btn-start {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    --border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+  }
+
+  /* Filas de tarjetas pequeñas (Campañas/Mantenimiento) */
+  .card-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .card-row ion-card {
+    flex: 1 1 50%;
+    margin: 0;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Botones de acento para notificaciones */
+  ion-button[fill="clear"] {
+    padding-right: 0;
+  }
+
+  ion-badge {
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-right: 5px;
+  }
