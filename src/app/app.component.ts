@@ -19,6 +19,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  checkmarkCircle,
   hammerOutline,
   chevronForward,
   callOutline,
@@ -49,6 +50,7 @@ import {
   closeOutline,
   notifications,
   buildOutline,
+  informationCircle
 } from 'ionicons/icons';
 
 @Component({
@@ -96,6 +98,8 @@ export class AppComponent {
 
   constructor() {
     addIcons({
+      checkmarkCircle,
+      informationCircle,
       closeOutline,
       notifications,
       buildOutline,

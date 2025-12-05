@@ -14,6 +14,8 @@ import {
   IonItem,
   IonButtons,
   IonInput,
+  IonSkeletonText,
+  IonToggle,
 } from '@ionic/angular/standalone';
 import { AppointmentPool } from '../home/interface/appointmentPool.interface';
 
@@ -36,6 +38,8 @@ import { AppointmentPool } from '../home/interface/appointmentPool.interface';
     CommonModule,
     FormsModule,
     IonInput,
+    IonSkeletonText,
+    IonToggle,
   ],
 })
 export class CheckInPage implements OnInit {
@@ -47,7 +51,7 @@ export class CheckInPage implements OnInit {
   crane: boolean = false;
   isEmergency: boolean = false;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     // Datos fijos simulados para la maqueta
@@ -78,9 +82,12 @@ export class CheckInPage implements OnInit {
       vehicleCampaigns: [1, 2], // Dos campañas activas simuladas
     };
 
-    this.cita = mockCita;
-    this.initForm(mockCita);
-    console.log('Maqueta de Cita cargada con datos fijos.');
+    // Simular carga de datos para mostrar skeleton
+    setTimeout(() => {
+      this.cita = mockCita;
+      this.initForm(mockCita);
+      console.log('Maqueta de Cita cargada con datos fijos.');
+    }, 2000);
   }
 
   // Inicializa los toggles con los valores de la cita

@@ -172,130 +172,169 @@
 }
 
 /** Clases de utilidad personalizadas **/
+/** Modo oscuro (opcional) **/
+@media (prefers-color-scheme: dark) {
+  body {
+    --ion-color-primary: #ffb620;
+    --ion-color-primary-rgb: 255, 182, 32;
+    --ion-color-primary-contrast: #000000;
+    --ion-color-primary-contrast-rgb: 0, 0, 0;
+    --ion-color-primary-shade: #e0a01c;
+    --ion-color-primary-tint: #ffbd36;
+
+    --ion-color-secondary: #ffce51;
+    --ion-color-secondary-rgb: 255, 206, 81;
+    --ion-color-secondary-contrast: #000000;
+    --ion-color-secondary-contrast-rgb: 0, 0, 0;
+    --ion-color-secondary-shade: #e0b548;
+    --ion-color-secondary-tint: #ffd362;
+
+    --ion-color-tertiary: #d95e0c;
+    --ion-color-tertiary-rgb: 217, 94, 12;
+    --ion-color-tertiary-contrast: #ffffff;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    --ion-color-tertiary-shade: #bf530b;
+    --ion-color-tertiary-tint: #dd6e24;
+
+    --ion-background-color: #1a0d01;
+    --ion-background-color-rgb: 26, 13, 1;
+
+    --ion-text-color: #fffaeb;
+    --ion-text-color-rgb: 255, 250, 235;
+
+    --ion-card-background: #2c1605;
+    --ion-item-background: #2c1605;
+    --ion-toolbar-background: #2c1605;
+    --ion-tab-bar-background: #2c1605;
+
+    --ion-border-color: #592e1b;
+
+    /* Dark mode steps for manual usage if needed */
+    --ion-background-color-step-50: #261605;
+    --ion-background-color-step-100: #321f09;
+    --ion-background-color-step-150: #3e280d;
+    --ion-background-color-step-200: #4a3111;
+    --ion-background-color-step-250: #563a15;
+    --ion-background-color-step-300: #624319;
+    --ion-background-color-step-350: #6e4c1d;
+    --ion-background-color-step-400: #7a5521;
+    --ion-background-color-step-450: #865e25;
+    --ion-background-color-step-500: #926729;
+
+    --ion-text-color-step-50: #f3efe2;
+    --ion-text-color-step-100: #e7e3d8;
+    --ion-text-color-step-150: #dbd8ce;
+    --ion-text-color-step-200: #cfcdc4;
+    --ion-text-color-step-250: #c3c1ba;
+    --ion-text-color-step-300: #b7b6b0;
+    --ion-text-color-step-350: #ababa6;
+    --ion-text-color-step-400: #9f9f9c;
+    --ion-text-color-step-450: #939392;
+    --ion-text-color-step-500: #878788;
+  }
+}
+
+/** Clases de utilidad personalizadas usando variables **/
 .golden-bg-50 {
-  background-color: #fffaeb !important;
+  background-color: var(--ion-background-color-step-50) !important;
 }
 
 .golden-bg-100 {
-  background-color: #fff1c6 !important;
+  background-color: var(--ion-background-color-step-100) !important;
 }
 
 .golden-bg-200 {
-  background-color: #ffe188 !important;
+  background-color: var(--ion-background-color-step-200) !important;
 }
 
 .golden-bg-300 {
-  background-color: #ffce51 !important;
+  background-color: var(--ion-background-color-step-300) !important;
 }
 
 .golden-bg-400 {
-  background-color: #ffb620 !important;
+  background-color: var(--ion-background-color-step-400) !important;
 }
 
 .golden-bg-500 {
-  background-color: #f99407 !important;
+  background-color: var(--ion-color-primary) !important;
 }
 
 .golden-bg-600 {
-  background-color: #dd6d02 !important;
+  background-color: var(--ion-color-primary-shade) !important;
 }
 
 .golden-bg-700 {
-  background-color: #b74b06 !important;
+  background-color: var(--ion-color-tertiary) !important;
 }
 
 .golden-bg-800 {
-  background-color: #94390c !important;
+  background-color: var(--ion-color-medium) !important;
 }
 
 .golden-bg-900 {
-  background-color: #7a300d !important;
+  background-color: var(--ion-color-dark-tint) !important;
+  /* Aproximación */
 }
 
 .golden-bg-950 {
-  background-color: #461702 !important;
+  background-color: var(--ion-color-dark) !important;
 }
 
 .golden-text-50 {
-  color: #fffaeb !important;
+  color: var(--ion-background-color) !important;
 }
 
 .golden-text-100 {
-  color: #fff1c6 !important;
+  color: var(--ion-color-light) !important;
 }
 
 .golden-text-200 {
-  color: #ffe188 !important;
+  color: var(--ion-border-color) !important;
 }
 
 .golden-text-300 {
-  color: #ffce51 !important;
+  color: var(--ion-color-secondary) !important;
 }
 
 .golden-text-400 {
-  color: #ffb620 !important;
+  color: var(--ion-color-warning) !important;
 }
 
 .golden-text-500 {
-  color: #f99407 !important;
+  color: var(--ion-color-primary) !important;
 }
 
 .golden-text-600 {
-  color: #dd6d02 !important;
+  color: var(--ion-color-primary-shade) !important;
 }
 
 .golden-text-700 {
-  color: #b74b06 !important;
+  color: var(--ion-color-tertiary) !important;
 }
 
 .golden-text-800 {
-  color: #94390c !important;
+  color: var(--ion-color-medium) !important;
 }
 
 .golden-text-900 {
-  color: #7a300d !important;
+  color: var(--ion-color-dark-tint) !important;
 }
 
 .golden-text-950 {
-  color: #461702 !important;
+  color: var(--ion-color-dark) !important;
 }
 
 .golden-border-primary {
-  border-color: #f99407 !important;
+  border-color: var(--ion-color-primary) !important;
 }
 
 .golden-border-secondary {
-  border-color: #ffce51 !important;
+  border-color: var(--ion-color-secondary) !important;
 }
 
 .golden-border-light {
-  border-color: #ffe188 !important;
+  border-color: var(--ion-border-color) !important;
 }
-
-/** Modo oscuro (opcional) **/
-// @media (prefers-color-scheme: dark) {
-//   body.dark {
-//     --ion-color-primary: #ffb620;
-//     --ion-color-primary-rgb: 255, 182, 32;
-//     --ion-color-primary-contrast: #000000;
-//     --ion-color-primary-contrast-rgb: 0, 0, 0;
-//     --ion-color-primary-shade: #e0a01c;
-//     --ion-color-primary-tint: #ffbd36;
-
-//     --ion-background-color: #461702;
-//     --ion-background-color-rgb: 70, 23, 2;
-
-//     --ion-text-color: #fffaeb;
-//     --ion-text-color-rgb: 255, 250, 235;
-
-//     --ion-card-background: #592e1b;
-//     --ion-item-background: #592e1b;
-//     --ion-toolbar-background: #7a300d;
-//     --ion-tab-bar-background: #592e1b;
-
-//     --ion-border-color: #94390c;
-//   }
-// }
 
 /** Estilos adicionales para componentes específicos **/
 ion-toolbar {

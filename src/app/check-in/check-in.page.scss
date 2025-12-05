@@ -64,11 +64,15 @@
   }
 
   /* Estilos para el Input de Chassis */
+  /* Estilos para el Input de Chassis */
   ion-input {
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-bottom: 0;
-    --padding-top: 0;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --padding-bottom: 12px;
+    --padding-top: 12px;
+    --background: var(--ion-item-background, #fff);
+    border: 1px solid var(--ion-border-color);
+    border-radius: 8px;
     font-weight: 600;
   }
 

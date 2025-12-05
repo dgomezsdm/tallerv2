@@ -87,17 +87,27 @@
 
 /* ===== Colores personalizados ===== */
 .mustard-toast.info {
+  --background: var(--ion-color-tertiary);
+  /* Blue/Info usually, but using tertiary or secondary for consistency if preferred. Wait, standard colors: */
+  /* Ionic standard colors are primary, secondary, tertiary, success, warning, danger, light, medium, dark. */
+  /* The original was blue #1976d2. Let's use a variable if available or keep it if it's specific. */
+  /* Actually, for "info", "success", "warning", "error", we should use the system colors if possible or define them. */
+  /* Variables.scss has --ion-color-success, --ion-color-warning, --ion-color-danger. */
+  /* It doesn't seem to have "info". I will use tertiary or a specific color, but better to use variables. */
+  /* Let's use specific variables if they exist or fallback to closest. */
   --background: #1976d2;
+  /* Keeping strict blue or using tertiary? Let's check variables again. */
 }
 
 .mustard-toast.success {
-  --background: #2e7d32;
+  --background: var(--ion-color-success);
 }
 
 .mustard-toast.warning {
-  --background: #ed6c02;
+  --background: var(--ion-color-warning);
+  --color: var(--ion-color-warning-contrast);
 }
 
 .mustard-toast.error {
-  --background: #d32f2f;
+  --background: var(--ion-color-danger);
 }
