@@ -2,13 +2,12 @@
   <ion-toolbar color="primary">
     <h5 class="headerTitle">Recepción Check-in</h5>
     <ion-buttons slot="end">
-      <ion-icon name="close-outline" class="golden-text-950" style="font-size: 1.8rem"
-        (click)="presentAlert()"></ion-icon>
+      <ion-icon name="close-outline" color="medium" style="font-size: 1.8rem" (click)="presentAlert()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="golden-bg-50">
+<ion-content [fullscreen]="true" class="cod-gray-bg-50">
   <div class="main-content">
     <form *ngIf="cita; else loading">
 
@@ -29,7 +28,7 @@
       <div class="form-container">
         <!-- TARJETA 1: CHASSIS -->
         <ion-card class="serviceCard">
-          <label for="type" class="serviceSubTitle golden-text-950">Chassis</label>
+          <label for="type" class="serviceSubTitle">Chassis</label>
           <ion-item lines="none" class="ion-no-padding">
             <ion-input class="serviceTitle" [value]="cita.chassis" placeholder="Chassis vehículo"
               [disabled]="verificateChassis" [(ngModel)]="writedChassis"
@@ -43,7 +42,7 @@
 
         <!-- TARJETA 2: SERVICIOS -->
         <ion-card class="serviceCard services-card">
-          <label for="service" class="serviceSubTitle golden-text-950">Servicios</label>
+          <label for="service" class="serviceSubTitle">Servicios</label>
           <ion-list class="ion-no-padding" lines="full">
             <ion-item *ngFor="let s of cita.services" class="service-item">
               <span class="serviceTitle ion-text-wrap">
@@ -56,7 +55,7 @@
 
         <!-- TARJETA 3: TIPO DE CITA -->
         <ion-card class="serviceCard">
-          <label for="type" class="serviceSubTitle golden-text-950">Tipo de Cita</label>
+          <label for="type" class="serviceSubTitle">Tipo de Cita</label>
           <span class="serviceTitle">{{cita.typeDescription}}</span>
         </ion-card>
 
@@ -64,7 +63,7 @@
         <div class="card-row">
           <ion-card class="serviceCard-row">
             <div class="ion-align-items-center">
-              <span class="serviceTitle golden-text-950">Campañas activas</span>
+              <span class="serviceTitle">Campañas activas</span>
             </div>
             <div>
               <ion-button fill="clear" color="tertiary" (click)="openModal()">
@@ -76,7 +75,7 @@
 
           <ion-card class="serviceCard-row">
             <div class="ion-align-items-center">
-              <span class="serviceTitle golden-text-950">Mant. anteriores</span>
+              <span class="serviceTitle">Mant. anteriores</span>
             </div>
             <div>
               <ion-button fill="clear" color="tertiary" (click)="openMantModal()">
@@ -89,17 +88,17 @@
         <!-- TOGGLES DE OPCIONES -->
         <ion-card class="serviceCard ion-margin-top toggle-group">
           <div class="selectBox">
-            <h6 class="serviceTitle golden-text-950">Recepción a domicilio</h6>
+            <h6 class="serviceTitle">Recepción a domicilio</h6>
             <ion-toggle color="primary" [(ngModel)]="home" [ngModelOptions]="{standalone: true}"></ion-toggle>
           </div>
 
           <div class="selectBox">
-            <h6 class="serviceTitle golden-text-950">Vehículo en grúa</h6>
+            <h6 class="serviceTitle">Vehículo en grúa</h6>
             <ion-toggle color="primary" [(ngModel)]="crane" [ngModelOptions]="{standalone: true}"></ion-toggle>
           </div>
 
           <div class="selectBox">
-            <h6 class="serviceTitle golden-text-950">Vehículo en emergencia</h6>
+            <h6 class="serviceTitle">Vehículo en emergencia</h6>
             <ion-toggle color="primary" [(ngModel)]="isEmergency" [ngModelOptions]="{standalone: true}"></ion-toggle>
           </div>
         </ion-card>
@@ -108,7 +107,7 @@
     </form>
 
     <ng-template #loading>
-      <div class="userInfo ion-padding-vertical golden-bg-500">
+      <div class="userInfo ion-padding-vertical cod-gray-bg-500">
         <div style="display: flex; justify-content: center; width: 100%;">
           <ion-skeleton-text animated style="width: 4rem; height: 4rem; border-radius: 50%"></ion-skeleton-text>
         </div>
