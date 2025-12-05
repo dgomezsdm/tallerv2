@@ -1,0 +1,21 @@
+.shared-btn {
+    --background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-primary-shade));
+    --background-hover: linear-gradient(90deg, var(--ion-color-primary-shade), var(--ion-color-tertiary));
+    --border-radius: 16px;
+    --box-shadow: 0 8px 24px rgba(var(--ion-color-primary-rgb), 0.32);
+    height: 56px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    width: 100%;
+    transition: 0.25s ease-in-out;
+
+    &:hover:not([disabled]) {
+        transform: translateY(-1px);
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

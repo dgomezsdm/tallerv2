@@ -1,0 +1,5 @@
+<ion-button [expand]="expand" [color]="color" class="shared-btn" [type]="type" [disabled]="disabled || loading"
+    (click)="handleClick()">
+    <span *ngIf="!loading">{{ label }}</span>
+    <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+</ion-button>

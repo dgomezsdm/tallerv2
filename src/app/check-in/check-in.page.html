@@ -2,12 +2,8 @@
   <ion-toolbar color="primary">
     <h5 class="headerTitle">Recepción Check-in</h5>
     <ion-buttons slot="end">
-      <ion-icon
-        name="close-outline"
-        class="golden-text-950"
-        style="font-size: 1.8rem"
-        (click)="presentAlert()"
-      ></ion-icon>
+      <ion-icon name="close-outline" class="golden-text-950" style="font-size: 1.8rem"
+        (click)="presentAlert()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,43 +11,31 @@
 <ion-content [fullscreen]="true" class="golden-bg-50">
   <div class="main-content">
     <form *ngIf="cita; else loading">
-      <!-- SECCIÓN DE INFO DEL CLIENTE -->
-      <div class="userInfo ion-padding-vertical golden-bg-500">
-        <ion-icon
-          style="font-size: 4rem"
-          name="person-circle-outline"
-          class="golden-text-950"
-        ></ion-icon>
-        <span class="UserName">
-          {{cita.clientNames | titlecase}} {{cita.clientSurnames | titlecase}}
-        </span>
-        <span class="dateInfo golden-text-950">
-          Cita #{{cita.numberOfAppointment}}
-        </span>
-      </div>
+
+      <!-- SECCIÓN DE INFO DEL CLIENTE (CLEAN CARD - NEW DESIGN) -->
+      <ion-card class="client-card">
+        <div class="client-content">
+          <div class="avatar-container">
+            <ion-icon name="person-sharp"></ion-icon>
+          </div>
+          <div class="text-container">
+            <h2 class="client-name">{{cita.clientNames | titlecase}} {{cita.clientSurnames | titlecase}}</h2>
+            <p class="appointment-id">Cita #{{cita.numberOfAppointment}}</p>
+          </div>
+        </div>
+      </ion-card>
 
       <!-- CONTENIDO PRINCIPAL: CHASSIS, SERVICIOS, ETC. -->
       <div class="form-container">
         <!-- TARJETA 1: CHASSIS -->
         <ion-card class="serviceCard">
-          <label for="type" class="serviceSubTitle golden-text-950"
-            >Chassis</label
-          >
+          <label for="type" class="serviceSubTitle golden-text-950">Chassis</label>
           <ion-item lines="none" class="ion-no-padding">
-            <ion-input
-              class="serviceTitle"
-              [value]="cita.chassis"
-              placeholder="Chassis vehículo"
-              [disabled]="verificateChassis"
-              [(ngModel)]="writedChassis"
-              [ngModelOptions]="{standalone: true}"
-            ></ion-input>
-            <ion-button
-              [color]="verificateChassis === true ? 'success' : 'secondary'"
-              [disabled]="verificateChassis"
-              (click)="hasChassis(writedChassis)"
-              class="ion-margin-start"
-            >
+            <ion-input class="serviceTitle" [value]="cita.chassis" placeholder="Chassis vehículo"
+              [disabled]="verificateChassis" [(ngModel)]="writedChassis"
+              [ngModelOptions]="{standalone: true}"></ion-input>
+            <ion-button [color]="verificateChassis === true ? 'success' : 'secondary'" [disabled]="verificateChassis"
+              (click)="hasChassis(writedChassis)" class="ion-margin-start">
               {{ verificateChassis === true ? 'Válido' : 'Validar'}}
             </ion-button>
           </ion-item>
@@ -59,9 +43,7 @@
 
         <!-- TARJETA 2: SERVICIOS -->
         <ion-card class="serviceCard services-card">
-          <label for="service" class="serviceSubTitle golden-text-950"
-            >Servicios</label
-          >
+          <label for="service" class="serviceSubTitle golden-text-950">Servicios</label>
           <ion-list class="ion-no-padding" lines="full">
             <ion-item *ngFor="let s of cita.services" class="service-item">
               <span class="serviceTitle ion-text-wrap">
@@ -74,9 +56,7 @@
 
         <!-- TARJETA 3: TIPO DE CITA -->
         <ion-card class="serviceCard">
-          <label for="type" class="serviceSubTitle golden-text-950"
-            >Tipo de Cita</label
-          >
+          <label for="type" class="serviceSubTitle golden-text-950">Tipo de Cita</label>
           <span class="serviceTitle">{{cita.typeDescription}}</span>
         </ion-card>
 
@@ -88,9 +68,7 @@
             </div>
             <div>
               <ion-button fill="clear" color="tertiary" (click)="openModal()">
-                <ion-badge color="warning" slot="start"
-                  >{{cita.vehicleCampaigns.length}}</ion-badge
-                >
+                <ion-badge color="warning" slot="start">{{cita.vehicleCampaigns.length}}</ion-badge>
                 <ion-icon name="notifications" slot="icon-only"></ion-icon>
               </ion-button>
             </div>
@@ -101,11 +79,7 @@
               <span class="serviceTitle golden-text-950">Mant. anteriores</span>
             </div>
             <div>
-              <ion-button
-                fill="clear"
-                color="tertiary"
-                (click)="openMantModal()"
-              >
+              <ion-button fill="clear" color="tertiary" (click)="openMantModal()">
                 <ion-icon name="build-outline" slot="icon-only"></ion-icon>
               </ion-button>
             </div>
@@ -116,52 +90,30 @@
         <ion-card class="serviceCard ion-margin-top toggle-group">
           <div class="selectBox">
             <h6 class="serviceTitle golden-text-950">Recepción a domicilio</h6>
-            <ion-toggle
-              color="primary"
-              [(ngModel)]="home"
-              [ngModelOptions]="{standalone: true}"
-            ></ion-toggle>
+            <ion-toggle color="primary" [(ngModel)]="home" [ngModelOptions]="{standalone: true}"></ion-toggle>
           </div>
 
           <div class="selectBox">
             <h6 class="serviceTitle golden-text-950">Vehículo en grúa</h6>
-            <ion-toggle
-              color="primary"
-              [(ngModel)]="crane"
-              [ngModelOptions]="{standalone: true}"
-            ></ion-toggle>
+            <ion-toggle color="primary" [(ngModel)]="crane" [ngModelOptions]="{standalone: true}"></ion-toggle>
           </div>
 
           <div class="selectBox">
             <h6 class="serviceTitle golden-text-950">Vehículo en emergencia</h6>
-            <ion-toggle
-              color="primary"
-              [(ngModel)]="isEmergency"
-              [ngModelOptions]="{standalone: true}"
-            ></ion-toggle>
+            <ion-toggle color="primary" [(ngModel)]="isEmergency" [ngModelOptions]="{standalone: true}"></ion-toggle>
           </div>
         </ion-card>
-
-        <!-- BOTÓN DE ACCIÓN -->
-        <ion-button
-          expand="block"
-          color="tertiary"
-          class="btn-start"
-          type="submit"
-          [disabled]="!canStart"
-          (click)="next()"
-        >
-          <span class="Lable">Iniciar Recepción</span>
-        </ion-button>
       </div>
+
     </form>
 
     <ng-template #loading>
       <div class="userInfo ion-padding-vertical golden-bg-500">
         <div style="display: flex; justify-content: center; width: 100%;">
-           <ion-skeleton-text animated style="width: 4rem; height: 4rem; border-radius: 50%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 4rem; height: 4rem; border-radius: 50%"></ion-skeleton-text>
         </div>
-        <ion-skeleton-text animated style="width: 60%; height: 24px; margin-top: 8px; margin-bottom: 4px;"></ion-skeleton-text>
+        <ion-skeleton-text animated
+          style="width: 60%; height: 24px; margin-top: 8px; margin-bottom: 4px;"></ion-skeleton-text>
         <ion-skeleton-text animated style="width: 40%; height: 16px;"></ion-skeleton-text>
       </div>
 
@@ -172,17 +124,23 @@
         </ion-card>
 
         <ion-card class="serviceCard">
-           <ion-skeleton-text animated style="width: 30%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
-           <ion-skeleton-text animated style="width: 100%; height: 20px; margin-bottom: 8px;"></ion-skeleton-text>
-           <ion-skeleton-text animated style="width: 90%; height: 20px; margin-bottom: 8px;"></ion-skeleton-text>
-           <ion-skeleton-text animated style="width: 80%; height: 20px; margin-bottom: 8px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 30%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%; height: 20px; margin-bottom: 8px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 90%; height: 20px; margin-bottom: 8px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 80%; height: 20px; margin-bottom: 8px;"></ion-skeleton-text>
         </ion-card>
 
         <ion-card class="serviceCard">
-           <ion-skeleton-text animated style="width: 30%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
-           <ion-skeleton-text animated style="width: 50%; height: 20px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 30%; height: 16px; margin-bottom: 8px;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 50%; height: 20px;"></ion-skeleton-text>
         </ion-card>
       </div>
     </ng-template>
   </div>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar style="--background: transparent; padding: 0 16px 16px 16px;">
+    <app-shared-button label="Iniciar Recepción" [disabled]="!canStart" (onClick)="next()"></app-shared-button>
+  </ion-toolbar>
+</ion-footer>

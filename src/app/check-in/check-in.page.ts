@@ -1,22 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonCard,
-  IonIcon,
-  IonBadge,
-  IonList,
-  IonItem,
-  IonButtons,
-  IonInput,
-  IonSkeletonText,
-  IonToggle,
-} from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { SharedButtonComponent } from '../shared/components/shared-button/shared-button.component';
 import { AppointmentPool } from '../home/interface/appointmentPool.interface';
 
 @Component({
@@ -24,22 +10,12 @@ import { AppointmentPool } from '../home/interface/appointmentPool.interface';
   templateUrl: './check-in.page.html',
   styleUrls: ['./check-in.page.scss'],
   standalone: true,
+  host: { class: 'ion-page' },
   imports: [
-    IonButtons,
-    IonItem,
-    IonList,
-    IonBadge,
-    IonIcon,
-    IonCard,
-    IonButton,
-    IonContent,
-    IonHeader,
-    IonToolbar,
     CommonModule,
     FormsModule,
-    IonInput,
-    IonSkeletonText,
-    IonToggle,
+    IonicModule,
+    SharedButtonComponent
   ],
 })
 export class CheckInPage implements OnInit {

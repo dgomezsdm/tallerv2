@@ -18,37 +18,19 @@
         <!-- Email -->
         <div class="input-group">
           <ion-item lines="none" class="input-item">
-            <ion-icon
-              name="mail-outline"
-              slot="start"
-              class="input-icon"
-            ></ion-icon>
+            <ion-icon name="mail-outline" slot="start" class="input-icon"></ion-icon>
             <ion-label position="floating">Correo electrónico</ion-label>
-            <ion-input
-              type="email"
-              [(ngModel)]="email"
-              name="email"
-              required
-            ></ion-input>
+            <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
           </ion-item>
         </div>
 
         <!-- Workshop -->
         <div class="input-group">
           <ion-item lines="none" class="input-item">
-            <ion-icon
-              name="business-outline"
-              slot="start"
-              class="input-icon"
-            ></ion-icon>
+            <ion-icon name="business-outline" slot="start" class="input-icon"></ion-icon>
             <ion-label position="floating">Seleccionar taller</ion-label>
 
-            <ion-select
-              [(ngModel)]="selectedWorkshop"
-              name="workshop"
-              placeholder="Elige tu taller"
-              required
-            >
+            <ion-select [(ngModel)]="selectedWorkshop" name="workshop" placeholder="Elige tu taller" required>
               <ion-select-option *ngFor="let t of workshops" [value]="t.taller">
                 {{ t.descripcion }}
               </ion-select-option>
@@ -57,16 +39,9 @@
         </div>
 
         <!-- Button -->
-        <ion-button
-          expand="block"
-          shape="round"
-          class="login-btn"
-          type="submit"
-          [disabled]="!email || !selectedWorkshop"
-        >
-          <ion-icon name="log-in-outline" slot="start"></ion-icon>
-          Iniciar Sesión
-        </ion-button>
+        <!-- Button -->
+        <app-shared-button label="Iniciar Sesión" [disabled]="!email || !selectedWorkshop" [loading]="isLoading"
+          (onClick)="onLogin()"></app-shared-button>
       </form>
 
       <!-- Footer -->

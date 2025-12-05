@@ -22,13 +22,14 @@ import { environment } from 'src/environments/environment';
 // Importar interfaces
 import { SAPWorkshops } from 'src/app/shared/interface/sap-workshops.interface';
 import { LoginLogic } from '../interfaces/login-logic.interface';
+import { SharedButtonComponent } from 'src/app/shared/components/shared-button/shared-button.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  imports: [CommonModule, FormsModule, IonicModule],
+  imports: [CommonModule, FormsModule, IonicModule, SharedButtonComponent],
 })
 export class LoginPage implements OnInit, OnDestroy {
   // Propiedades del formulario

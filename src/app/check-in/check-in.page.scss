@@ -12,26 +12,70 @@
     margin-left: 16px;
   }
 
-  .userInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    margin-bottom: 16px;
-    background: var(--ion-color-primary);
-    /* Usa el color primario */
-    border-radius: 0 0 30px 30px;
-    /* Borde inferior redondeado */
-    box-shadow: var(--ion-box-shadow-color) 0px 4px 16px;
+  /* Client Card Styles */
+  .client-card {
+    margin: 16px 0;
+    padding: 16px;
+    /* Aumentar padding */
+    border-radius: 20px;
+    /* Bordes más suaves */
+    background: var(--ion-card-background);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    /* Sombra más difusa */
+
+    /* Custom layout similar to 'ion-item' but with flex */
   }
 
-  .UserName {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--ion-color-primary-contrast);
-    margin-top: 8px;
+  .client-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .avatar-container {
+    width: 56px;
+    /* Más grande */
+    height: 56px;
+    background: linear-gradient(135deg, var(--ion-color-secondary), var(--ion-color-primary));
+    /* Gradiente diferente */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(var(--ion-color-primary-rgb), 0.3);
+    flex-shrink: 0;
+
+    ion-icon {
+      font-size: 28px;
+      color: #fff;
+    }
+  }
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .client-name {
+    font-size: 1.2rem;
+    /* Un poco más grande */
+    font-weight: 800;
+    /* Texto más bold */
+    color: var(--ion-text-color);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .appointment-id {
+    font-size: 0.95rem;
+    color: var(--ion-color-medium);
+    margin: 4px 0 0 0;
+    font-weight: 500;
+  }
+
+  /* Padding seguro para que el botón sticky no tape el contenido */
+  .form-container {
+    padding-bottom: 80px;
   }
 
   .dateInfo {
@@ -63,7 +107,6 @@
     color: var(--ion-text-color);
   }
 
-  /* Estilos para el Input de Chassis */
   /* Estilos para el Input de Chassis */
   ion-input {
     --padding-start: 12px;
@@ -105,16 +148,6 @@
 
   .selectBox:last-child {
     border-bottom: none;
-  }
-
-  /* Botón de Iniciar */
-  .btn-start {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    --border-radius: 20px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    font-size: 1.1rem;
   }
 
   /* Filas de tarjetas pequeñas (Campañas/Mantenimiento) */
