@@ -50,7 +50,9 @@ import {
   closeOutline,
   notifications,
   buildOutline,
-  informationCircle
+  informationCircle,
+  personCircleOutline,
+  informationCircleSharp
 } from 'ionicons/icons';
 
 @Component({
@@ -98,6 +100,8 @@ export class AppComponent {
 
   constructor() {
     addIcons({
+      informationCircleSharp,
+      personCircleOutline,
       checkmarkCircle,
       informationCircle,
       closeOutline,
