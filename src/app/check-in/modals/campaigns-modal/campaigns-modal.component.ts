@@ -1,6 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController, PopoverController } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import {
+    chevronBackOutline,
+    carSport,
+    checkmarkCircle,
+    checkmarkCircleOutline,
+    closeCircle,
+    alertCircle
+} from 'ionicons/icons';
 import { AppointmentData } from '../../interfaces/appointment-data.interface';
 import { CheckInService } from '../../services/check-in-service';
 import { VehicleCampaigns } from '../../interfaces/vehicle-campains.interface';
@@ -21,7 +30,16 @@ export class CampaignsModalComponent implements OnInit {
         private modalCtrl: ModalController,
         private checkInService: CheckInService,
         private popoverCtrl: PopoverController
-    ) { }
+    ) {
+        addIcons({
+            chevronBackOutline,
+            carSport,
+            checkmarkCircle,
+            checkmarkCircleOutline,
+            closeCircle,
+            alertCircle
+        });
+    }
 
     ngOnInit() {
         if (this.vehicleData && this.vehicleData.Chassis) {
