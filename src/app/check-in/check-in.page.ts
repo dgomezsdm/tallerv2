@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SharedButtonComponent } from '../shared/components/shared-button/shared-button.component';
-import { AppointmentPool } from '../home/interface/appointmentPool.interface';
+
+import { ActivatedRoute } from '@angular/router';
+import { CheckInService } from './services/check-in-service';
+import { AppointmentData } from './interfaces/appointment-data.interface';
 
 @Component({
   selector: 'app-check-in',
@@ -19,7 +22,7 @@ import { AppointmentPool } from '../home/interface/appointmentPool.interface';
   ],
 })
 export class CheckInPage implements OnInit {
-  cita: any | null = null;
+  cita: AppointmentData | null = null;
   writedChassis: string = '';
   verificateChassis: boolean = false;
   canStart: boolean = true; // Se fija en true para el mockup
@@ -27,52 +30,50 @@ export class CheckInPage implements OnInit {
   crane: boolean = false;
   isEmergency: boolean = false;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private checkInService: CheckInService
+  ) { }
 
   ngOnInit(): void {
-    // Datos fijos simulados para la maqueta
-    const mockCita: any = {
-      numberOfAppointment: '000120411181',
-      clientNames: 'MILTON',
-      clientSurnames: 'RAFAEL',
-      chassis: 'MA3JC74W9S0194045',
-      typeDescription: 'Chequeo',
-      crane: false,
-      home: true, // Cambiado a true para mostrar el toggle activo
-      isEmergency: false,
-      services: [
-        {
-          serviceNumber: '001',
-          serviceDescription: 'Diagnóstico general de motor',
-        },
-        {
-          serviceNumber: '002',
-          serviceDescription: 'Cambio de aceite y filtro',
-        },
-        {
-          serviceNumber: '003',
-          serviceDescription: 'Rotación y balanceo de neumáticos',
-        },
-        { serviceNumber: '004', serviceDescription: 'Inspección de frenos' },
-      ],
-      vehicleCampaigns: [1, 2], // Dos campañas activas simuladas
-    };
+    this.route.queryParams.subscribe((params) => {
+      const appointmentNumber = params['appointmentNumber'];
+      if (appointmentNumber) {
+        this.loadAppointmentData(appointmentNumber);
+      } else {
+        console.warn('No appointmentNumber provided');
+        this.canStart = false;
+        // Handle case properly - maybe go back or show empty state?
+        // For now, we just don't load mock data.
+      }
+    });
+  }
 
-    // Simular carga de datos para mostrar skeleton
-    setTimeout(() => {
-      this.cita = mockCita;
-      this.initForm(mockCita);
-      console.log('Maqueta de Cita cargada con datos fijos.');
-    }, 2000);
+  loadAppointmentData(appointmentNumber: string) {
+    this.checkInService.getAppointmentData(appointmentNumber).subscribe({
+      next: (data) => {
+        this.cita = data;
+        this.initForm(data);
+        console.log('Cita loaded:', data);
+        console.log('Cita loaded:', this.cita);
+      },
+      error: (err) => {
+        console.error('Error loading appointment:', err);
+        // Handle error handling
+      },
+    });
   }
 
   // Inicializa los toggles con los valores de la cita
-  initForm(ap: AppointmentPool): void {
+  initForm(ap: AppointmentData): void {
     this.writedChassis = ap.chassis;
     this.home = ap.home;
     this.crane = ap.crane;
     this.isEmergency = ap.isEmergency;
-    this.verificateChassis = true; // Simula que el chasis ya está validado
+    this.verificateChassis = true; // Simula que el chasis ya está validado o debería validarse?
+    // Assuming if data comes from backend, it's valid? 
+    // Or do we still need to validate? The mockup said "Simula que el chasis ya está validado"
+    // We'll keep it as true for now if loaded successfully.
   }
 
   // Los siguientes métodos permanecen como stubs de la lógica real

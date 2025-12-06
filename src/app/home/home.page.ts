@@ -591,6 +591,8 @@ export class HomePage implements OnInit {
 
   openAppointment(ap: AppointmentPool) {
     console.log('Clicked:', ap);
-    this.router.navigate(['/app/check-in']);
+    this.router.navigate(['/app/check-in'], {
+      queryParams: { appointmentNumber: ap.numberOfAppointment },
+    });
   }
 }
