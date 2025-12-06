@@ -60,6 +60,19 @@ export class CheckInPage implements OnInit {
           this.cita = data[0];
           if (this.cita) {
             this.initForm(this.cita);
+
+            // Load campaigns to update the badge
+            if (this.cita.Chassis) {
+              this.checkInService.getVehicleCampaigns(this.cita.Chassis).subscribe({
+                next: (campaigns) => {
+                  if (this.cita) {
+                    this.cita.VehicleCampaigns = campaigns;
+                    console.log('Campaigns loaded for badge:', campaigns);
+                  }
+                },
+                error: (err) => console.error('Error loading campaigns for badge', err)
+              });
+            }
           }
           console.log('Cita loaded:', this.cita);
           // Optional: force resize if needed, though setTimeout usually suffices
