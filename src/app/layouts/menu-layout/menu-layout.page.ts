@@ -41,6 +41,7 @@ import {
   personCircleOutline,
   logOutOutline,
   settingsOutline,
+  informationCircle
 } from 'ionicons/icons';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -96,6 +97,7 @@ export class MenuLayoutPage implements OnInit, OnDestroy {
     { title: 'Histórico', url: '/app/folder/archived', icon: 'archive' },
     { title: 'Perfil asesor', url: '/app/folder/trash', icon: 'trash' },
     { title: 'Almacenamiento', url: '/app/folder/spam', icon: 'warning' },
+    { title: 'Acerca de', url: '/app/about', icon: 'information-circle' },
   ];
 
   constructor(
@@ -137,9 +139,9 @@ export class MenuLayoutPage implements OnInit, OnDestroy {
       warningSharp,
       bookmarkOutline,
       bookmarkSharp,
-      personCircleOutline,
       logOutOutline,
       settingsOutline,
+      informationCircle,
     });
   }
 

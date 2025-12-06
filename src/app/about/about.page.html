@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Acerca de Nosotros</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding bg-light">
+    <div class="header-section ion-text-center">
+        <h2>Nuestro Equipo</h2>
+        <p class="subtitle">Conoce a las personas detrás de la aplicación</p>
+    </div>
+
+    <div class="team-container">
+        <ion-card *ngFor="let member of team" class="member-card">
+            <ion-item lines="none" class="member-item">
+                <ion-avatar slot="start" class="member-avatar initials-avatar">
+                    {{ member.initials }}
+                </ion-avatar>
+                <ion-label>
+                    <h3>{{ member.name }}</h3>
+                    <p class="role-badge">{{ member.role }}</p>
+                </ion-label>
+            </ion-item>
+            <ion-card-content class="member-description">
+                {{ member.description }}
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+    <div class="footer-info ion-text-center ion-padding-top">
+        <ion-note>Versión 1.0.0</ion-note>
+    </div>
+</ion-content>
