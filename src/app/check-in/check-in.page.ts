@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonContent } from '@ionic/angular';
 import { SharedButtonComponent } from '../shared/components/shared-button/shared-button.component';
 
 import { ActivatedRoute } from '@angular/router';
@@ -22,6 +22,7 @@ import { AppointmentData } from './interfaces/appointment-data.interface';
   ],
 })
 export class CheckInPage implements OnInit {
+  @ViewChild(IonContent) content!: IonContent;
   cita: AppointmentData | null = null;
   writedChassis: string = '';
   verificateChassis: boolean = false;
@@ -51,11 +52,17 @@ export class CheckInPage implements OnInit {
 
   loadAppointmentData(appointmentNumber: string) {
     this.checkInService.getAppointmentData(appointmentNumber).subscribe({
-      next: (data) => {
-        this.cita = data;
-        this.initForm(data);
-        console.log('Cita loaded:', data);
-        console.log('Cita loaded:', this.cita);
+      next: (data: any) => {
+        // Use setTimeout to avoid 'offsetHeight' error during rapid DOM changes
+        setTimeout(() => {
+          this.cita = data[0];
+          if (this.cita) {
+            this.initForm(this.cita);
+          }
+          console.log('Cita loaded:', this.cita);
+          // Optional: force resize if needed, though setTimeout usually suffices
+          // this.content?.resize(); 
+        }, 0);
       },
       error: (err) => {
         console.error('Error loading appointment:', err);
@@ -66,10 +73,10 @@ export class CheckInPage implements OnInit {
 
   // Inicializa los toggles con los valores de la cita
   initForm(ap: AppointmentData): void {
-    this.writedChassis = ap.chassis;
-    this.home = ap.home;
-    this.crane = ap.crane;
-    this.isEmergency = ap.isEmergency;
+    this.writedChassis = ap.Chassis;
+    this.home = ap.Home;
+    this.crane = ap.Crane;
+    this.isEmergency = ap.IsEmergency;
     this.verificateChassis = true; // Simula que el chasis ya está validado o debería validarse?
     // Assuming if data comes from backend, it's valid? 
     // Or do we still need to validate? The mockup said "Simula que el chasis ya está validado"

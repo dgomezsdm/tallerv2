@@ -18,8 +18,8 @@
             <ion-icon name="person-sharp"></ion-icon>
           </div>
           <div class="text-container">
-            <h2 class="client-name">{{cita.clientNames | titlecase}} {{cita.clientSurnames | titlecase}}</h2>
-            <p class="appointment-id">Cita #{{cita.numberOfAppointment}}</p>
+            <h2 class="client-name">{{cita.ClientNames | titlecase}} {{cita.ClientSurnames | titlecase}}</h2>
+            <p class="appointment-id">Cita #{{cita.NumberOfAppointment}}</p>
           </div>
         </div>
       </ion-card>
@@ -30,9 +30,8 @@
         <ion-card class="serviceCard">
           <label for="type" class="serviceSubTitle">Chassis</label>
           <ion-item lines="none" class="ion-no-padding">
-            <ion-input class="serviceTitle" [value]="cita.chassis" placeholder="Chassis vehículo"
-              [disabled]="verificateChassis" [(ngModel)]="writedChassis"
-              [ngModelOptions]="{standalone: true}"></ion-input>
+            <ion-input class="serviceTitle" placeholder="Chassis vehículo" [disabled]="verificateChassis"
+              [(ngModel)]="writedChassis" [ngModelOptions]="{standalone: true}"></ion-input>
             <ion-button [color]="verificateChassis === true ? 'success' : 'secondary'" [disabled]="verificateChassis"
               (click)="hasChassis(writedChassis)" class="ion-margin-start">
               {{ verificateChassis === true ? 'Válido' : 'Validar'}}
@@ -44,10 +43,9 @@
         <ion-card class="serviceCard services-card">
           <label for="service" class="serviceSubTitle">Servicios</label>
           <ion-list class="ion-no-padding" lines="full">
-            <ion-item *ngFor="let s of cita.services" class="service-item">
+            <ion-item *ngFor="let s of cita.Services" class="service-item">
               <span class="serviceTitle ion-text-wrap">
-                {{s.serviceNumber}}: {{s.serviceDescription | lowercase |
-                titlecase}}
+                {{s.ServiceDescription | lowercase | titlecase}}
               </span>
             </ion-item>
           </ion-list>
@@ -56,7 +54,7 @@
         <!-- TARJETA 3: TIPO DE CITA -->
         <ion-card class="serviceCard">
           <label for="type" class="serviceSubTitle">Tipo de Cita</label>
-          <span class="serviceTitle">{{cita.typeDescription}}</span>
+          <span class="serviceTitle">{{cita.TypeDescription}}</span>
         </ion-card>
 
         <!-- TARJETA 4 & 5: CAMPAÑAS Y MANTENIMIENTOS (FLEX ROW) -->
@@ -67,7 +65,7 @@
             </div>
             <div>
               <ion-button fill="clear" color="tertiary" (click)="openModal()">
-                <ion-badge color="warning" slot="start">{{cita.vehicleCampaigns?.length || 0}}</ion-badge>
+                <ion-badge color="warning" slot="start">{{cita.VehicleCampaigns?.length || 0}}</ion-badge>
                 <ion-icon name="notifications" slot="icon-only"></ion-icon>
               </ion-button>
             </div>
