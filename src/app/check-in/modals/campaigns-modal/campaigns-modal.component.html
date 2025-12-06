@@ -1,0 +1,100 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="dismiss()">
+                <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Campañas activas</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding bg-light">
+
+    <div class="vehicle-info-section ion-text-center" *ngIf="vehicleData">
+        <div class="vehicle-icon-container">
+            <ion-icon name="car-sport" class="vehicle-icon"></ion-icon>
+        </div>
+
+        <h2 class="vehicle-model">{{ vehicleData.ModelDescription | titlecase }}</h2>
+        <p class="vehicle-year">{{ vehicleData.VehicleYear }}</p>
+
+        <div class="details-grid">
+            <div class="detail-item">
+                <span class="label">Chasis</span>
+                <span class="value">{{ vehicleData.Chassis }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Marca</span>
+                <span class="value">{{ vehicleData.BrandCode }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Versión</span>
+                <span class="value">{{ vehicleData.VersionDescription }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="campaigns-section">
+        <h3 class="section-title">
+            Campañas encontradas
+            <ion-badge color="dark">{{ vehicleCampaigns.length }}</ion-badge>
+        </h3>
+
+        <div *ngIf="loading" class="ion-text-center ion-padding">
+            <ion-spinner></ion-spinner>
+            <p>Consultando campañas...</p>
+        </div>
+
+        <div *ngIf="!loading && vehicleCampaigns.length === 0" class="empty-state">
+            <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+            <p>Este vehículo no tiene campañas pendientes.</p>
+        </div>
+
+        <ion-card *ngFor="let campaign of vehicleCampaigns" class="campaign-card">
+            <ion-item lines="none" class="card-header-item">
+                <ion-label>
+                    <h2>Tipo Garantía #{{ campaign.typeWarrantyNumber }}</h2>
+                    <p>Clase: {{ campaign.warrantyClass === '1' ? 'Garantía de Fábrica' : 'Campaña' }}</p>
+                </ion-label>
+
+                <!-- Status Icons -->
+                <!-- Active -->
+                <ion-icon slot="end" name="checkmark-circle" color="success" class="status-icon"
+                    *ngIf="validateWarantyDateByYears(campaign)" title="Garantía Activa"></ion-icon>
+
+                <!-- Expired -->
+                <ion-icon slot="end" name="close-circle" color="danger" class="status-icon"
+                    *ngIf="!validateWarantyDateByYears(campaign)" title="Garantía Vencida"></ion-icon>
+
+                <!-- Warning (Logic to be refined if needed) -->
+                <!-- <ion-icon slot="end" name="alert-circle" color="warning" ...></ion-icon> -->
+            </ion-item>
+
+            <ion-card-content>
+                <div class="info-row">
+                    <span class="label">Descripción:</span>
+                    <span class="text">{{ campaign.warrantyDescription | titlecase }}</span>
+                </div>
+
+                <div class="info-row" *ngIf="campaign.descriptionfCollateralPosition">
+                    <span class="label">Posición:</span>
+                    <span class="text">{{ campaign.descriptionfCollateralPosition | titlecase }}</span>
+                </div>
+
+                <div class="dates-container">
+                    <div class="date-box">
+                        <span class="label">Inicio</span>
+                        <span class="date">{{ campaign.warrantyStartDate | date:'dd/MM/yyyy' }}</span>
+                    </div>
+                    <div class="date-arrow">→</div>
+                    <div class="date-box">
+                        <span class="label">Fin</span>
+                        <span class="date">{{ campaign.warrantyEndDate | date:'dd/MM/yyyy' }}</span>
+                    </div>
+                </div>
+            </ion-card-content>
+        </ion-card>
+
+    </div>
+</ion-content>

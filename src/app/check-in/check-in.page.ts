@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, IonContent } from '@ionic/angular';
+import { IonicModule, IonContent, ModalController } from '@ionic/angular';
 import { SharedButtonComponent } from '../shared/components/shared-button/shared-button.component';
 
 import { ActivatedRoute } from '@angular/router';
 import { CheckInService } from './services/check-in-service';
 import { AppointmentData } from './interfaces/appointment-data.interface';
+import { CampaignsModalComponent } from './modals/campaigns-modal/campaigns-modal.component';
 
 @Component({
   selector: 'app-check-in',
@@ -33,7 +34,8 @@ export class CheckInPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private checkInService: CheckInService
+    private checkInService: CheckInService,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit(): void {
@@ -94,8 +96,17 @@ export class CheckInPage implements OnInit {
     console.log('Alerta de cerrar/cancelar presentada (Mock).');
   }
 
-  openModal(): void {
-    console.log('Abriendo modal de campañas (Mock)');
+  async openModal() {
+    console.log('Abriendo modal de campañas');
+    if (!this.cita) return;
+
+    const modal = await this.modalCtrl.create({
+      component: CampaignsModalComponent,
+      componentProps: {
+        vehicleData: this.cita
+      }
+    });
+    await modal.present();
   }
 
   openMantModal(): void {

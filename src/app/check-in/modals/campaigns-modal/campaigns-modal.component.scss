@@ -1,0 +1,165 @@
+.bg-light {
+    --background: #f8f9fa;
+}
+
+.vehicle-info-section {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    .vehicle-icon-container {
+        width: 64px;
+        height: 64px;
+        background: var(--ion-color-light);
+        border-radius: 50%;
+        margin: 0 auto 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .vehicle-icon {
+            font-size: 32px;
+            color: var(--ion-color-dark);
+        }
+    }
+
+    .vehicle-model {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: 0 0 4px;
+        color: var(--ion-text-color);
+    }
+
+    .vehicle-year {
+        font-size: 1rem;
+        color: var(--ion-color-medium);
+        margin: 0 0 20px;
+    }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        text-align: center;
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+
+            .label {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: var(--ion-color-medium);
+                margin-bottom: 4px;
+            }
+
+            .value {
+                font-weight: 600;
+                font-size: 0.9rem;
+                color: var(--ion-text-color);
+            }
+        }
+    }
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-left: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.campaign-card {
+    margin: 0 0 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: white;
+
+    .card-header-item {
+        --background: transparent;
+        --border-style: none;
+        border-bottom: 1px solid var(--ion-color-light);
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 0.85rem;
+            color: var(--ion-color-medium);
+        }
+
+        .status-icon {
+            font-size: 24px;
+            margin-inline-start: 10px;
+        }
+    }
+
+    .info-row {
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+
+        .label {
+            font-weight: 600;
+            color: var(--ion-color-dark);
+            margin-right: 6px;
+        }
+
+        .text {
+            color: var(--ion-color-medium-shade);
+        }
+    }
+
+    .dates-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--ion-color-light-tint);
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 12px;
+
+        .date-box {
+            display: flex;
+            flex-direction: column;
+
+            .label {
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                color: var(--ion-color-medium-shade);
+            }
+
+            .date {
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+        }
+
+        .date-arrow {
+            color: var(--ion-color-medium);
+            font-weight: 600;
+        }
+    }
+}
+
+.empty-state {
+    margin-top: 40px;
+
+    ion-icon {
+        font-size: 64px;
+        margin-bottom: 16px;
+        opacity: 0.8;
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: var(--ion-color-medium);
+    }
+}
