@@ -15,12 +15,7 @@ import { CampaignsModalComponent } from './modals/campaigns-modal/campaigns-moda
   styleUrls: ['./check-in.page.scss'],
   standalone: true,
   host: { class: 'ion-page' },
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SharedButtonComponent
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, SharedButtonComponent],
 })
 export class CheckInPage implements OnInit {
   @ViewChild(IonContent) content!: IonContent;
@@ -36,7 +31,7 @@ export class CheckInPage implements OnInit {
     private route: ActivatedRoute,
     private checkInService: CheckInService,
     private modalCtrl: ModalController
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -63,21 +58,26 @@ export class CheckInPage implements OnInit {
 
             // Load campaigns to update the badge
             if (this.cita.Chassis) {
-              this.checkInService.getVehicleCampaigns(this.cita.Chassis).subscribe({
-                next: (campaigns) => {
-                  if (this.cita) {
-                    this.cita.VehicleCampaigns = campaigns;
-                    console.log('Campaigns loaded for badge:', campaigns);
-                  }
-                },
-                error: (err) => console.error('Error loading campaigns for badge', err)
-              });
+              this.checkInService
+                .getVehicleCampaigns(this.cita.Chassis)
+                .subscribe({
+                  next: (campaigns) => {
+                    if (this.cita) {
+                      this.cita.VehicleCampaigns = campaigns;
+                      console.log('Campaigns loaded for badge:', campaigns);
+                    }
+                  },
+                  error: (err) =>
+                    console.error('Error loading campaigns for badge', err),
+                });
             }
           }
           console.log('Cita loaded:', this.cita);
           // Optional: force resize if needed, though setTimeout usually suffices
-          // this.content?.resize(); 
+          // this.content?.resize();
         }, 0);
+
+        this.hasChassis(this.cita!.Chassis);
       },
       error: (err) => {
         console.error('Error loading appointment:', err);
@@ -93,7 +93,7 @@ export class CheckInPage implements OnInit {
     this.crane = ap.Crane;
     this.isEmergency = ap.IsEmergency;
     this.verificateChassis = true; // Simula que el chasis ya está validado o debería validarse?
-    // Assuming if data comes from backend, it's valid? 
+    // Assuming if data comes from backend, it's valid?
     // Or do we still need to validate? The mockup said "Simula que el chasis ya está validado"
     // We'll keep it as true for now if loaded successfully.
   }
@@ -116,8 +116,8 @@ export class CheckInPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CampaignsModalComponent,
       componentProps: {
-        vehicleData: this.cita
-      }
+        vehicleData: this.cita,
+      },
     });
     await modal.present();
   }
