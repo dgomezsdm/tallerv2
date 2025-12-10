@@ -39,11 +39,15 @@ import { ActivatedRoute, Router } from '@angular/router';
     SharedButtonComponent,
     IonCard,
     IonIcon,
-    IonButton,
   ],
 })
 export class InsideImagesPage implements OnInit {
-  imgList: Array<{ id?: number; image: string; comment: string; appointmentNumber: string }> = [];
+  imgList: Array<{
+    id?: number;
+    image: string;
+    comment: string;
+    appointmentNumber: string;
+  }> = [];
   appointmentNumber = '';
   readonly maxImages = 6;
 
@@ -67,13 +71,12 @@ export class InsideImagesPage implements OnInit {
   }
 
   private async loadFromCache() {
-    const dataImages =
-      this.appointmentNumber
-        ? await this.cacheImgServices.getImagesByAppointment(
-            'insideImages',
-            this.appointmentNumber
-          )
-        : await this.cacheImgServices.getImages('insideImages');
+    const dataImages = this.appointmentNumber
+      ? await this.cacheImgServices.getImagesByAppointment(
+          'insideImages',
+          this.appointmentNumber
+        )
+      : await this.cacheImgServices.getImages('insideImages');
 
     if (dataImages?.length) {
       this.imgList = dataImages;
@@ -91,7 +94,6 @@ export class InsideImagesPage implements OnInit {
     }
 
     try {
-      // En web algunos navegadores bloquean CameraSource.Prompt; forzamos Photos y, si falla, usamos input file
       const photo = await Camera.getPhoto({
         quality: 80,
         source: this.isWeb() ? CameraSource.Photos : CameraSource.Prompt,
@@ -107,8 +109,21 @@ export class InsideImagesPage implements OnInit {
         throw new Error('No se pudo obtener la imagen.');
       }
 
+      // Calcular tamaño original
+      const originalSizeBytes = (photo.base64String.length * 3) / 4;
+      const originalSizeKB = (originalSizeBytes / 1024).toFixed(2);
+      const originalSizeMB = (originalSizeBytes / (1024 * 1024)).toFixed(2);
+
+      console.log(
+        `📸 Foto original: ${originalSizeKB} KB (${originalSizeMB} MB)`
+      );
+
+      const compressedImages = await this.imageService.compressImage(
+        photo.base64String
+      );
+
       this.imgList.push({
-        image: photo.base64String,
+        image: compressedImages,
         comment: 'N/A',
         appointmentNumber: this.appointmentNumber,
       });
@@ -125,6 +140,52 @@ export class InsideImagesPage implements OnInit {
       this.presentAlert('No se pudo tomar la foto. Inténtalo de nuevo.');
     }
   }
+
+  // async takePicture() {
+  //   if (this.imgList.length >= this.maxImages) {
+  //     this.presentAlert(`No puedes subir más de ${this.maxImages} fotos.`);
+  //     return;
+  //   }
+
+  //   try {
+  //     // En web algunos navegadores bloquean CameraSource.Prompt; forzamos Photos y, si falla, usamos input file
+  //     const photo = await Camera.getPhoto({
+  //       quality: 80,
+  //       source: this.isWeb() ? CameraSource.Photos : CameraSource.Prompt,
+  //       promptLabelPhoto: 'Abrir galería',
+  //       promptLabelPicture: 'Tomar fotografía',
+  //       promptLabelHeader: 'Seleccionar fotografía',
+  //       allowEditing: false,
+  //       width: 800,
+  //       resultType: CameraResultType.Base64,
+  //     });
+
+  //     if (!photo.base64String) {
+  //       throw new Error('No se pudo obtener la imagen.');
+  //     }
+
+  //     const compressedImages = await this.imageService.compressImage(
+  //       photo.base64String
+  //     );
+
+  //     this.imgList.push({
+  //       image: compressedImages,
+  //       comment: 'N/A',
+  //       appointmentNumber: this.appointmentNumber,
+  //     });
+  //   } catch (error: any) {
+  //     // Fallback en web con input file nativo
+  //     if (this.isWeb()) {
+  //       const picked = await this.pickFromFile();
+  //       if (picked) return;
+  //     }
+  //     if (error?.message?.includes('User cancelled')) {
+  //       return;
+  //     }
+  //     console.error('Error al tomar foto', error);
+  //     this.presentAlert('No se pudo tomar la foto. Inténtalo de nuevo.');
+  //   }
+  // }
 
   async onRemove(image: { id?: number }) {
     this.imgList = this.imgList.filter((img) => img !== image);

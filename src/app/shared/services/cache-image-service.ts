@@ -10,7 +10,11 @@ interface ImageCacheItem {
 }
 
 // Union Type para asegurar que solo se usan nombres de tabla válidos
-type TableName = 'insideImages' | 'outsideImages' | 'capImages' | 'backImages';
+export type TableName =
+  | 'insideImages'
+  | 'outsideImages'
+  | 'capImages'
+  | 'backImages';
 
 @Injectable({
   providedIn: 'root',
