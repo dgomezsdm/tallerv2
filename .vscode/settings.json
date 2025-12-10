@@ -4,6 +4,10 @@
     "@ionic/angular"
   ],
   "cSpell.words": [
+    "autogenerado",
+    "autoincremental",
+    "dexie",
+    "Dexie",
     "maxlength",
     "Redimensionado"
   ]
