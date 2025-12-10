@@ -102,6 +102,9 @@
         </ion-card>
       </div>
 
+      <div class="action-bar">
+        <app-shared-button label="Iniciar Recepción" [disabled]="!canStart" (onClick)="next()"></app-shared-button>
+      </div>
     </form>
 
     <ng-template #loading>
@@ -132,12 +135,10 @@
           <ion-skeleton-text animated style="width: 50%; height: 20px;"></ion-skeleton-text>
         </ion-card>
       </div>
+
+      <div class="action-bar">
+        <app-shared-button label="Iniciar Recepción" [disabled]="true"></app-shared-button>
+      </div>
     </ng-template>
   </div>
 </ion-content>
-
-<ion-footer class="ion-no-border">
-  <ion-toolbar style="--background: transparent; padding: 0 16px 16px 16px;">
-    <app-shared-button label="Iniciar Recepción" [disabled]="!canStart" (onClick)="next()"></app-shared-button>
-  </ion-toolbar>
-</ion-footer>

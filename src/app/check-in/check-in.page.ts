@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, IonContent, ModalController } from '@ionic/angular';
 import { SharedButtonComponent } from '../shared/components/shared-button/shared-button.component';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CheckInService } from './services/check-in-service';
 import { AppointmentData } from './interfaces/appointment-data.interface';
 import { CampaignsModalComponent } from './modals/campaigns-modal/campaigns-modal.component';
@@ -30,7 +30,8 @@ export class CheckInPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private checkInService: CheckInService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +53,9 @@ export class CheckInPage implements OnInit {
       next: (data: any) => {
         // Use setTimeout to avoid 'offsetHeight' error during rapid DOM changes
         setTimeout(() => {
-          this.cita = data[0];
+          const citaData = data?.[0] || null;
+          this.cita = citaData;
+
           if (this.cita) {
             this.initForm(this.cita);
 
@@ -71,13 +74,18 @@ export class CheckInPage implements OnInit {
                     console.error('Error loading campaigns for badge', err),
                 });
             }
+
+            // Marcar chasis validado cuando llega la data
+            this.hasChassis(this.cita.Chassis);
+          } else {
+            console.warn('No appointment data found for number:', appointmentNumber);
+            this.canStart = false;
           }
+
           console.log('Cita loaded:', this.cita);
           // Optional: force resize if needed, though setTimeout usually suffices
           // this.content?.resize();
         }, 0);
-
-        this.hasChassis(this.cita!.Chassis);
       },
       error: (err) => {
         console.error('Error loading appointment:', err);
@@ -128,5 +136,14 @@ export class CheckInPage implements OnInit {
 
   next(): void {
     console.log('Iniciando recepción (Mock)...');
+
+    this.router.navigate(['/app/check-in/vehicle-interior'], {
+      state: {
+        serviceType: this.cita?.TypeDescription,
+        isWalkin: false,
+        appointmentNumber: this.cita?.NumberOfAppointment,
+        vehicleData: this.cita,
+      },
+    });
   }
 }

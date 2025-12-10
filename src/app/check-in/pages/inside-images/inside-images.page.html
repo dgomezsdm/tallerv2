@@ -1,0 +1,174 @@
+<!-- <ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/check-in" color="medium"></ion-back-button>
+    </ion-buttons>
+    <h5 class="headerTitle">Fotos interior del vehículo</h5>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="cod-gray-bg-50">
+  <div class="main-content">
+    <ion-card class="serviceCard">
+      <div class="section-header">
+        <div>
+          <p class="serviceSubTitle">Fotografías</p>
+          <h3 class="serviceTitle">
+            Interior del vehículo
+            <span class="pill" *ngIf="imgList?.length">
+              {{ imgList.length }}
+            </span>
+          </h3>
+          <p class="helper">Añade fotos claras del interior antes de continuar.</p>
+        </div>
+        <div class="inline-actions">
+          <app-shared-button
+            label="Tomar foto"
+            (onClick)="takePicture()"
+            size="small"
+          >
+            <ion-icon slot="start" name="camera"></ion-icon>
+          </app-shared-button>
+        </div>
+      </div>
+
+      <div class="dropzone" (click)="takePicture()">
+        <ion-icon name="cloud-upload"></ion-icon>
+        <div class="dropzone-text">
+          <p class="title">Cargar fotografías</p>
+          <p class="hint">Toca para tomar o seleccionar imágenes</p>
+        </div>
+      </div>
+
+      <div *ngIf="imgList?.length; else emptyState" class="image-grid">
+        <div
+          class="image-card"
+          *ngFor="let i of imgList"
+          (click)="customAlert(i)"
+        >
+          <div
+            class="image"
+            [style.backgroundImage]="'url(data:image/png;base64,' + i.image + ')'"
+          ></div>
+          <button
+            type="button"
+            class="chip danger"
+            (click)="onRemove(i); $event.stopPropagation()"
+          >
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </div>
+      </div>
+
+      <ng-template #emptyState>
+        <div class="empty-state">
+          <ion-icon name="images"></ion-icon>
+          <p class="serviceTitle">Sin fotografías aún</p>
+          <p class="hint">Toma al menos una foto para continuar.</p>
+        </div>
+      </ng-template>
+    </ion-card>
+
+    <div class="action-bar">
+      <app-shared-button
+        label="Continuar"
+        [disabled]="!(imgList?.length)"
+        (onClick)="saveImages()"
+      >
+      </app-shared-button>
+    </div>
+  </div>
+</ion-content> -->
+
+
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/check-in" color="medium"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="headerTitle">Fotos interior del vehículo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="page-bg">
+  <div class="main-content">
+
+    <ion-card class="card">
+      <div class="section-header">
+        <div>
+          <p class="subtitle">Fotografías</p>
+
+          <h3 class="title">
+            Interior del vehículo
+            <span class="pill" *ngIf="imgList?.length">
+              {{ imgList.length }}
+            </span>
+          </h3>
+
+          <p class="helper">Añade fotos claras del interior antes de continuar.</p>
+        </div>
+
+        <app-shared-button
+          label="Tomar foto"
+          (onClick)="takePicture()"
+          size="small"
+        >
+          <ion-icon slot="start" name="camera"></ion-icon>
+        </app-shared-button>
+      </div>
+
+      <!-- DROPZONE -->
+      <div class="dropzone" (click)="takePicture()">
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+        <div>
+          <p class="dz-title">Cargar fotografías</p>
+          <p class="dz-hint">Toca para tomar o seleccionar imágenes</p>
+        </div>
+      </div>
+
+      <!-- IMAGE GRID -->
+      <ng-container *ngIf="imgList?.length; else emptyState">
+        <div class="image-grid">
+          <div
+            class="image-card"
+            *ngFor="let i of imgList"
+            (click)="customAlert(i)"
+          >
+            <div
+              class="image"
+              [style.backgroundImage]="'url(data:image/png;base64,' + i.image + ')'"
+            ></div>
+
+            <button
+              type="button"
+              class="remove-btn"
+              (click)="onRemove(i); $event.stopPropagation()"
+            >
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- EMPTY STATE -->
+      <ng-template #emptyState>
+        <div class="empty-state">
+          <ion-icon name="images-outline"></ion-icon>
+          <p class="title">Sin fotografías aún</p>
+          <p class="hint">Toma al menos una foto para continuar.</p>
+        </div>
+      </ng-template>
+    </ion-card>
+
+  </div>
+</ion-content>
+
+<!-- REAL FOOTER -->
+<ion-footer class="footer">
+  <app-shared-button
+    label="Continuar"
+    [disabled]="!(imgList?.length)"
+    (onClick)="saveImages()"
+  ></app-shared-button>
+</ion-footer>

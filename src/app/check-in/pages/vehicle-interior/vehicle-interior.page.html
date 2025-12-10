@@ -1,0 +1,340 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/app/check-in"
+        color="medium"
+      ></ion-back-button>
+    </ion-buttons>
+    <h5 class="headerTitle">Interior del Vehículo</h5>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="cod-gray-bg-50">
+  <div class="main-content">
+    <!-- SECCIÓN DE INFO DEL SERVICIO -->
+    <ion-card class="client-card">
+      <div class="client-content">
+        <div class="avatar-container">
+          <ion-icon name="car-sport-sharp"></ion-icon>
+        </div>
+        <div class="text-container">
+          <h2 class="client-name">Inspección Interior</h2>
+          <p class="appointment-id">{{ serviceType }}</p>
+        </div>
+      </div>
+    </ion-card>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="form-container">
+      <!-- TARJETA: KILOMETRAJE -->
+      <ion-card class="serviceCard" *ngIf="!isWalkin">
+        <label class="serviceSubTitle">Kilometraje del Vehículo</label>
+        <ion-item lines="none" class="ion-no-padding">
+          <ion-input
+            class="serviceTitle"
+            type="tel"
+            placeholder="Ingrese kilometraje"
+            maxlength="7"
+            [(ngModel)]="insidePart.vehicleMileage"
+            [ngModelOptions]="{ standalone: true }"
+            
+          ></ion-input>
+          <ion-select
+            [(ngModel)]="insidePart.unitOfMeasurement"
+            interface="popover"
+            class="ion-margin-start unit-select"
+          >
+          <!-- (input)="validMileage($event)" -->
+            <ion-select-option selected value="KM">KM</ion-select-option>
+            <ion-select-option value="MLL">Millas</ion-select-option>
+            <ion-select-option value="H">Horas</ion-select-option>
+          </ion-select>
+          <ion-icon
+            *ngIf="validMilage"
+            name="checkmark-circle"
+            color="success"
+            class="validation-icon"
+          ></ion-icon>
+          <ion-icon
+            *ngIf="!validMilage && insidePart.vehicleMileage"
+            name="alert-circle"
+            color="danger"
+            class="validation-icon"
+          ></ion-icon>
+        </ion-item>
+      </ion-card>
+
+      <!-- TARJETA: COMBUSTIBLE -->
+      <ion-card class="serviceCard">
+        <label class="serviceSubTitle">Nivel de Combustible</label>
+        <ion-item lines="none" class="ion-no-padding">
+          <ion-select
+            class="serviceTitle"
+            placeholder="Seleccione nivel"
+            [(ngModel)]="insidePart.currentFuel"
+            interface="action-sheet"
+          >
+            <ion-select-option value="Full">🟢 Full</ion-select-option>
+            <ion-select-option value="3/4"
+              >🟡 3/4 - Tres cuartos</ion-select-option
+            >
+            <ion-select-option value="1/2">🟠 1/2 - Medio</ion-select-option>
+            <ion-select-option value="1/4"
+              >🔴 1/4 - Un cuarto</ion-select-option
+            >
+            <ion-select-option value="Reserva">⚠️ Reserva</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card>
+
+      <!-- LEYENDA -->
+      <ion-card class="serviceCard legend-card">
+        <div class="legend-content">
+          <span class="legend-label">Estado:</span>
+          <div class="legend-items">
+            <span class="legend-item"><strong>B</strong> Bueno</span>
+            <span class="legend-item"><strong>D</strong> Dañado</span>
+            <span class="legend-item"><strong>F</strong> Faltante</span>
+          </div>
+        </div>
+      </ion-card>
+
+      <!-- LISTA DE COMPONENTES -->
+      <ion-card class="serviceCard components-container">
+        <label class="serviceSubTitle">Componentes del Interior</label>
+
+        <!-- Beeper -->
+        <div class="component-row">
+          <span class="component-name">Beeper</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.beeper"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Pito de Bocina -->
+        <div class="component-row">
+          <span class="component-name">Pito de Bocina</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.hornWhistle"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Tapasol -->
+        <div class="component-row">
+          <span class="component-name">Tapasol</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.umbrella"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Luces Interiores -->
+        <div class="component-row">
+          <span class="component-name">Luces Interiores</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.interiorLights"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Funcionamiento Sunroof -->
+        <div class="component-row">
+          <span class="component-name">Funcionamiento Sunroof</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.sunroofOperation"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Tapa Consola Central -->
+        <div class="component-row">
+          <span class="component-name">Tapa Consola Central</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.centerConsoleLid"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Rejillas A/C -->
+        <div class="component-row">
+          <span class="component-name">Rejillas A/C</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.a_C_Grille"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Aire Acondicionado -->
+        <div class="component-row">
+          <span class="component-name">Aire Acondicionado</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.air_conditioning"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Radio (Bocinas) -->
+        <div class="component-row">
+          <span class="component-name">Radio (Bocinas)</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.radio"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Encendedor -->
+        <div class="component-row">
+          <span class="component-name">Encendedor</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.lighter"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Gaveta Cenicero -->
+        <div class="component-row">
+          <span class="component-name">Gaveta Cenicero</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.ashtrayDrawer"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Funcionamiento Cristales -->
+        <div class="component-row">
+          <span class="component-name">Funcionamiento Cristales</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.crystalsOperation"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Switch Cristales -->
+        <div class="component-row">
+          <span class="component-name">Switch Cristales</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.switchCrystals"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Funcionamiento Seguros -->
+        <div class="component-row">
+          <span class="component-name">Funcionamiento Seguros</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.safeOperation"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Tapizado Asientos -->
+        <div class="component-row">
+          <span class="component-name">Tapizado Asientos</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.upholsteredSeats"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Molduras -->
+        <div class="component-row">
+          <span class="component-name">Molduras</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.moldings"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <!-- Alfombras -->
+        <div class="component-row">
+          <span class="component-name">Alfombras</span>
+          <ion-radio-group
+            [(ngModel)]="insidePart.rugs"
+            class="radio-group-inline"
+          >
+            <ion-radio value="Bueno" class="radio-good"></ion-radio>
+            <ion-radio value="Dañado" class="radio-damaged"></ion-radio>
+            <ion-radio value="Faltante" class="radio-missing"></ion-radio>
+          </ion-radio-group>
+        </div>
+      </ion-card>
+    </div>
+
+    <div class="action-bar">
+      <app-shared-button
+        label="Continuar"
+        
+        (onClick)="send()"
+      >
+      </app-shared-button>
+    </div>
+  </div>
+</ion-content>
+<!-- [disabled]="!validMilage" -->

@@ -1,30 +1,4 @@
-// import { Routes } from '@angular/router';
 
-// export const routes: Routes = [
-//   {
-//     path: '',
-//     redirectTo: 'login',
-//     pathMatch: 'full',
-//   },
-//   {
-//     path: 'folder/:id',
-//     loadComponent: () =>
-//       import('./folder/folder.page').then((m) => m.FolderPage),
-//   },
-//   {
-//     path: 'home',
-//     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-//   },
-//   {
-//     path: 'login',
-//     loadComponent: () =>
-//       import('./auth/login/login.page').then((m) => m.LoginPage),
-//   },
-//   {
-//     path: 'menu-layout',
-//     loadComponent: () => import('./layouts/menu-layout/menu-layout.page').then( m => m.MenuLayoutPage)
-//   },
-// ];
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -58,6 +32,18 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./check-in/check-in.page').then((m) => m.CheckInPage),
       },
+      // 🚗 Nueva ruta: Interior del vehículo
+      {
+        path: 'check-in/vehicle-interior',
+        loadComponent: () =>
+          import(
+            './check-in/pages/vehicle-interior/vehicle-interior.page'
+          ).then((m) => m.VehicleInteriorPage),
+      },
+      {
+        path: 'check-in/inside-images',
+        loadComponent: () => import('./check-in/pages/inside-images/inside-images.page').then( m => m.InsideImagesPage)
+      },
       {
         path: 'folder/:id',
         loadComponent: () =>
@@ -75,8 +61,6 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'login',
   },
-  // {
-  //   path: 'check-in',
-  //   loadComponent: () => import('./check-in/check-in.page').then( m => m.CheckInPage)
-  // },
+ 
+
 ];
