@@ -20,28 +20,27 @@ import { Capacitor } from '@capacitor/core';
 import { CacheImgService } from 'src/app/shared/services/cache-image-service';
 import { ImageService } from 'src/app/shared/services/image-service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
-  selector: 'app-inside-images',
-  templateUrl: './inside-images.page.html',
-  styleUrls: ['./inside-images.page.scss'],
+  selector: 'app-out-side-images',
+  templateUrl: './out-side-images.page.html',
+  styleUrls: ['./out-side-images.page.scss'],
   standalone: true,
   imports: [
-    IonContent,
-    IonHeader,
-    IonToolbar,
     IonButtons,
-    IonBackButton,
+    IonIcon,
+    IonContent,
     IonFooter,
+    IonHeader,
     IonTitle,
+    IonToolbar,
     CommonModule,
     FormsModule,
     SharedButtonComponent,
+    IonBackButton,
     IonCard,
-    IonIcon,
   ],
 })
-export class InsideImagesPage implements OnInit {
+export class OutSideImagesPage implements OnInit {
   imgList: Array<{
     id?: number;
     image: string;
@@ -73,10 +72,10 @@ export class InsideImagesPage implements OnInit {
   private async loadFromCache() {
     const dataImages = this.appointmentNumber
       ? await this.cacheImgServices.getImagesByAppointment(
-          'insideImages',
+          'outsideImages',
           this.appointmentNumber
         )
-      : await this.cacheImgServices.getImages('insideImages');
+      : await this.cacheImgServices.getImages('outsideImages');
 
     if (dataImages?.length) {
       this.imgList = dataImages;
@@ -144,7 +143,7 @@ export class InsideImagesPage implements OnInit {
   async onRemove(image: { id?: number }) {
     this.imgList = this.imgList.filter((img) => img !== image);
     if (image.id) {
-      await this.cacheImgServices.deleteImage('insideImages', image.id);
+      await this.cacheImgServices.deleteImage('outsideImages', image.id);
     }
   }
 
@@ -158,7 +157,7 @@ export class InsideImagesPage implements OnInit {
     try {
       const success = await this.imageService.saveImages(
         this.imgList,
-        'insideImages'
+        'outsideImages'
       );
 
       if (success) {
@@ -168,14 +167,6 @@ export class InsideImagesPage implements OnInit {
       }
     } finally {
       loading.dismiss();
-
-      this.router.navigate(['/app/check-in/inside-images'], {
-        state: {
-          // interiorData: this.insidePart,
-          // serviceType: this.serviceType,
-          appointmentNumber: this.appointmentNumber,
-        },
-      });
     }
   }
 

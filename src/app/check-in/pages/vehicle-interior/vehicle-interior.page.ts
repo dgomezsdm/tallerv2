@@ -27,7 +27,7 @@ import {
 } from 'ionicons/icons';
 import { SharedButtonComponent } from 'src/app/shared/components/shared-button/shared-button.component';
 import { LocalStorageService } from 'src/app/shared/services/local-storage';
-import { RecepcionService } from 'src/app/shared/services/reception';
+import { ReceptionService } from 'src/app/shared/services/reception';
 
 // Interfaz para el modelo de datos
 interface InsidePart {
@@ -116,7 +116,7 @@ export class VehicleInteriorPage implements OnInit {
   constructor(
     private router: Router,
     private storage: LocalStorageService,
-    private recepcionService: RecepcionService
+    private receptionService: ReceptionService
   ) {
     // Registrar iconos
     addIcons({
@@ -145,51 +145,51 @@ export class VehicleInteriorPage implements OnInit {
 
     this.restoreFromStorage();
   }
-    //TODO: Volver habilitar la validación de kilometraje
+  //TODO: Volver habilitar la validación de kilometraje
   /**
    * Valida que el kilometraje sea un número válido
    */
-//   validMileage(event: any) {
-//     const value = event.target.value ?? '';
-//     const numericValue = value.toString().replace(/[^0-9]/g, '');
-//     this.insidePart.vehicleMileage = numericValue;
+  //   validMileage(event: any) {
+  //     const value = event.target.value ?? '';
+  //     const numericValue = value.toString().replace(/[^0-9]/g, '');
+  //     this.insidePart.vehicleMileage = numericValue;
 
-//     // Si es walk-in, no necesita validar con backend
-//     if (this.isWalkin) {
-//       this.validMilage = true;
-//       return;
-//     }
+  //     // Si es walk-in, no necesita validar con backend
+  //     if (this.isWalkin) {
+  //       this.validMilage = true;
+  //       return;
+  //     }
 
-//     // Resetear cuando está vacío
-//     if (!numericValue) {
-//       this.validMilage = false;
-//       return;
-//     }
-// console.log('vehicleData', JSON.stringify(this.vehicleData));
-//     // Debounce y llamada a validación de millaje
-//     clearTimeout(this.mileageTimer);
-//     this.mileageTimer = setTimeout(() => {
-//       const chassis = this.vehicleData?.chassis || this.vehicleData?.Chassis;
-//       if (!chassis) {
-//         console.warn('No se encontró chassis para validar millaje');
-//         this.validMilage = false;
-//         return;
-//       }
+  //     // Resetear cuando está vacío
+  //     if (!numericValue) {
+  //       this.validMilage = false;
+  //       return;
+  //     }
+  // console.log('vehicleData', JSON.stringify(this.vehicleData));
+  //     // Debounce y llamada a validación de millaje
+  //     clearTimeout(this.mileageTimer);
+  //     this.mileageTimer = setTimeout(() => {
+  //       const chassis = this.vehicleData?.chassis || this.vehicleData?.Chassis;
+  //       if (!chassis) {
+  //         console.warn('No se encontró chassis para validar millaje');
+  //         this.validMilage = false;
+  //         return;
+  //       }
 
-//       const mileageNumber = Number(numericValue);
-//       this.recepcionService
-//         .getValidMileage(chassis, mileageNumber)
-//         .subscribe({
-//           next: () => {
-//             this.validMilage = true;
-//           },
-//           error: (err) => {
-//             console.error('Millaje no válido', err?.error ?? err);
-//             this.validMilage = false;
-//           },
-//         });
-//     }, 500);
-//   }
+  //       const mileageNumber = Number(numericValue);
+  //       this.recepcionService
+  //         .getValidMileage(chassis, mileageNumber)
+  //         .subscribe({
+  //           next: () => {
+  //             this.validMilage = true;
+  //           },
+  //           error: (err) => {
+  //             console.error('Millaje no válido', err?.error ?? err);
+  //             this.validMilage = false;
+  //           },
+  //         });
+  //     }, 500);
+  //   }
 
   /**
    * Envía los datos y navega a la siguiente pantalla
@@ -211,7 +211,6 @@ export class VehicleInteriorPage implements OnInit {
 
     // Navegar a la siguiente pantalla (por ejemplo, exterior del vehículo)
 
-   
     this.router.navigate(['/app/check-in/inside-images'], {
       state: {
         interiorData: this.insidePart,

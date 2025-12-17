@@ -1,4 +1,3 @@
-
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -42,7 +41,17 @@ export const routes: Routes = [
       },
       {
         path: 'check-in/inside-images',
-        loadComponent: () => import('./check-in/pages/inside-images/inside-images.page').then( m => m.InsideImagesPage)
+        loadComponent: () =>
+          import('./check-in/pages/inside-images/inside-images.page').then(
+            (m) => m.InsideImagesPage
+          ),
+      },
+      {
+        path: 'check-in/out-side-images',
+        loadComponent: () =>
+          import('./check-in/pages/out-side-images/out-side-images.page').then(
+            (m) => m.OutSideImagesPage
+          ),
       },
       {
         path: 'folder/:id',
@@ -61,6 +70,4 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'login',
   },
- 
-
 ];
