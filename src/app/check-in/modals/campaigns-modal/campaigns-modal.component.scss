@@ -10,10 +10,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.dark .vehicle-info-section {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
     .vehicle-icon-container {
         width: 64px;
         height: 64px;
@@ -85,10 +81,6 @@
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     background: var(--app-card-background, white);
-}
-
-.dark .campaign-card {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
     .card-header-item {

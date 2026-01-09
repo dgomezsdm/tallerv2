@@ -9,9 +9,9 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
-/* Transición suave para cambio de tema */
+/* Transiciones suaves para cambios de estado */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 /* Core CSS required for Ionic components to work properly */
@@ -37,8 +37,9 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
+/* Dark mode deshabilitado - siempre modo claro */
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-@import '@ionic/angular/css/palettes/dark.class.css';
+/* @import '@ionic/angular/css/palettes/dark.class.css'; */
 /* @import "@ionic/angular/css/palettes/dark.system.css"; */
 
 
@@ -109,68 +110,4 @@
 .mustard-toast.error {
   --background: var(--ion-color-danger);
   --color: var(--ion-color-danger-contrast);
-}
-
-/* Dark mode adjustments for toasts */
-.dark .mustard-toast.info {
-  --background: #42a5f5;
-  --color: #ffffff;
-}
-
-/* ===== Estilos adicionales para dark mode ===== */
-.dark {
-  /* Asegurar que los cards y elementos tengan buen contraste */
-  ion-card {
-    --background: var(--app-card-background, #2a2a2a);
-  }
-
-  /* Mejorar contraste en listas */
-  ion-list {
-    background: var(--app-background, #1a1a1a);
-  }
-
-  ion-item {
-    --background: transparent;
-    --color: var(--app-text, #ffffff);
-  }
-
-  /* Ajustar bordes para mejor visibilidad */
-  ion-item-divider {
-    --background: var(--app-background-alt, #242424);
-    --color: var(--app-text-secondary, #b0b0b0);
-  }
-
-  /* Mejorar visibilidad de inputs */
-  ion-input,
-  ion-textarea {
-    --color: var(--app-text, #ffffff);
-    --placeholder-color: var(--app-text-secondary, #b0b0b0);
-  }
-
-  /* Ajustar modales */
-  ion-modal {
-    --background: var(--app-background, #1a1a1a);
-  }
-
-  /* Mejorar visibilidad de toolbars */
-  ion-toolbar {
-    --background: var(--app-background-alt, #242424);
-    --color: var(--app-text, #ffffff);
-  }
-
-  /* Ajustar grids y rows */
-  ion-grid {
-    --background: var(--app-background, #1a1a1a);
-  }
-
-  /* Ajustar contenido */
-  ion-content {
-    --background: var(--app-background, #1a1a1a);
-  }
-
-  /* Mejorar visibilidad de badges */
-  ion-badge {
-    --background: var(--ion-color-primary);
-    --color: var(--ion-color-primary-contrast);
-  }
 }

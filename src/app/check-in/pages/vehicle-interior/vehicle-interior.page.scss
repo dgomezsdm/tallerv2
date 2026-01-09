@@ -27,10 +27,10 @@
 .client-card {
   margin: 16px 0 8px;
   padding: 16px;
-  background: var(--ion-card-background);
+  background: var(--app-card-background, var(--ion-card-background));
   border-radius: 18px;
   box-shadow: 0 8px 24px rgba(var(--ion-color-primary-rgb), 0.08);
-  border: 1px solid var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08));
+  border: 1px solid var(--app-border, var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08)));
 }
 
 .client-content {
@@ -85,11 +85,11 @@
 }
 
 .serviceCard {
-  background: var(--ion-card-background);
+  background: var(--app-card-background, var(--ion-card-background));
   border-radius: 14px;
   padding: 16px;
   margin: 0;
-  border: 1px solid var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08));
+  border: 1px solid var(--app-border, var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08)));
   box-shadow: 0 4px 14px rgba(var(--ion-color-primary-rgb), 0.06);
 }
 
@@ -116,7 +116,7 @@ ion-item {
   --padding-end: 0;
   --inner-padding-end: 0;
   --min-height: auto;
-  border: 1px solid var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08));
+  border: 1px solid var(--app-border, var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08)));
   border-radius: 12px;
   padding: 6px 8px;
 }
@@ -156,7 +156,7 @@ ion-select {
 
 .legend-card {
   background: rgba(var(--ion-color-primary-rgb), 0.04);
-  border: 1px solid var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08));
+  border: 1px solid var(--app-border, var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08)));
 }
 
 .legend-content {
@@ -209,7 +209,7 @@ ion-select {
   align-items: center;
   justify-content: space-between;
   padding: 12px 8px;
-  border-bottom: 1px solid var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08));
+  border-bottom: 1px solid var(--app-border, var(--ion-border-color, rgba(var(--ion-color-primary-rgb), 0.08)));
   min-height: 52px;
   gap: 12px;
 }
@@ -270,8 +270,9 @@ ion-footer ion-toolbar {
 .action-bar {
   margin-top: auto;
   padding: 12px var(--page-padding) 0;
-  background: var(--ion-background-color);
+  background: var(--app-background, var(--ion-background-color));
   position: relative;
+  border-top: 1px solid var(--app-border, var(--ion-border-color));
 }
 
 .action-bar app-shared-button {

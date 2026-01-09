@@ -29,7 +29,7 @@
 .login-container {
   width: 100%;
   max-width: 420px;
-  background: var(--ion-card-background);
+  background: var(--app-card-background, var(--ion-card-background));
   padding: 40px 30px;
   border-radius: 28px;
   box-shadow: 0 12px 40px var(--ion-box-shadow-color);
@@ -56,14 +56,13 @@
   width: 100px;
   height: 100px;
   margin: 0 auto 20px;
-  background: var(--ion-item-background);
+  background: var(--app-card-background, var(--ion-item-background));
   padding: 14px;
   border-radius: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  /* Consider using variable if appropriate */
 }
 
 .logo-img {
@@ -108,8 +107,8 @@
 }
 
 .input-item {
-  --background: var(--ion-item-background);
-  border: 1px solid var(--ion-border-color);
+  --background: var(--app-card-background, var(--ion-item-background));
+  border: 1px solid var(--app-border, var(--ion-border-color));
   border-radius: 14px;
   --padding-start: 16px;
   --inner-padding-end: 12px;
