@@ -41,13 +41,16 @@ import {
   personCircleOutline,
   logOutOutline,
   settingsOutline,
-  informationCircle
+  informationCircle,
+  moonOutline,
+  sunnyOutline
 } from 'ionicons/icons';
 import { Subject, takeUntil } from 'rxjs';
 
 // Servicios
 import { LocalStorageService } from 'src/app/shared/services/local-storage';
 import { AlertService } from 'src/app/shared/services/alert';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 import { LoginLogic } from 'src/app/auth/interfaces/login-logic.interface';
 
 @Component({
@@ -85,6 +88,7 @@ export class MenuLayoutPage implements OnInit, OnDestroy {
   userEmail = '';
   userInitials = '';
   workshopName = '';
+  isDarkMode = false;
 
   // Subject para cleanup
   private readonly destroy$ = new Subject<void>();
@@ -104,9 +108,11 @@ export class MenuLayoutPage implements OnInit, OnDestroy {
     private readonly localStorageService: LocalStorageService,
     private readonly alertService: AlertService,
     private readonly router: Router,
-    private readonly cd: ChangeDetectorRef
+    private readonly cd: ChangeDetectorRef,
+    private readonly themeService: ThemeService
   ) {
     this.registerIcons();
+    this.isDarkMode = this.themeService.isDarkMode();
   }
 
   ngOnInit(): void {
@@ -142,6 +148,8 @@ export class MenuLayoutPage implements OnInit, OnDestroy {
       logOutOutline,
       settingsOutline,
       informationCircle,
+      moonOutline,
+      sunnyOutline,
     });
   }
 
@@ -162,9 +170,8 @@ export class MenuLayoutPage implements OnInit, OnDestroy {
         this.extractUserData(userData);
         this.cd.detectChanges(); // <-- ESTO ES CLAVE: Fuerzas la actualización del template
       }
-      console.log('Información del usuario cargada:', this.userInfo);
     } catch (error) {
-      console.error('Error al cargar información del usuario:', error);
+      // Error silencioso, el usuario puede no estar logueado aún
     }
   }
 
@@ -278,7 +285,6 @@ export class MenuLayoutPage implements OnInit, OnDestroy {
         this.router.navigate(['/login']);
       }, 500);
     } catch (error) {
-      console.error('Error al cerrar sesión:', error);
       await this.alertService.error('Error al cerrar sesión');
     }
   }
@@ -297,5 +303,28 @@ export class MenuLayoutPage implements OnInit, OnDestroy {
   goToSettings(): void {
     // Implementar navegación a settings
     this.alertService.toastInfo('Función de configuración próximamente');
+  }
+
+  /**
+   * Alterna entre tema claro y oscuro
+   */
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+    this.isDarkMode = this.themeService.isDarkMode();
+    this.cd.detectChanges();
+  }
+
+  /**
+   * Obtiene el icono del tema actual
+   */
+  getThemeIcon(): string {
+    return this.isDarkMode ? 'sunny-outline' : 'moon-outline';
+  }
+
+  /**
+   * Obtiene el texto del tema actual
+   */
+  getThemeText(): string {
+    return this.isDarkMode ? 'Tema claro' : 'Tema oscuro';
   }
 }

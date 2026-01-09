@@ -9,6 +9,11 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+/* Transición suave para cambio de tema */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -33,8 +38,8 @@
  */
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import '@ionic/angular/css/palettes/dark.class.css';
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
 
 
 /* ===== Toast General ===== */
@@ -43,8 +48,8 @@
   --padding-start: 14px;
   --padding-end: 14px;
   --min-height: 48px;
-  --background: #323232;
-  --color: white;
+  --background: var(--app-toast-background, #323232);
+  --color: var(--app-toast-text, #ffffff);
   display: flex !important;
   align-items: center;
   gap: 10px;
@@ -87,20 +92,13 @@
 
 /* ===== Colores personalizados ===== */
 .mustard-toast.info {
-  --background: var(--ion-color-tertiary);
-  /* Blue/Info usually, but using tertiary or secondary for consistency if preferred. Wait, standard colors: */
-  /* Ionic standard colors are primary, secondary, tertiary, success, warning, danger, light, medium, dark. */
-  /* The original was blue #1976d2. Let's use a variable if available or keep it if it's specific. */
-  /* Actually, for "info", "success", "warning", "error", we should use the system colors if possible or define them. */
-  /* Variables.scss has --ion-color-success, --ion-color-warning, --ion-color-danger. */
-  /* It doesn't seem to have "info". I will use tertiary or a specific color, but better to use variables. */
-  /* Let's use specific variables if they exist or fallback to closest. */
   --background: #1976d2;
-  /* Keeping strict blue or using tertiary? Let's check variables again. */
+  --color: #ffffff;
 }
 
 .mustard-toast.success {
   --background: var(--ion-color-success);
+  --color: var(--ion-color-success-contrast);
 }
 
 .mustard-toast.warning {
@@ -110,4 +108,69 @@
 
 .mustard-toast.error {
   --background: var(--ion-color-danger);
+  --color: var(--ion-color-danger-contrast);
+}
+
+/* Dark mode adjustments for toasts */
+.dark .mustard-toast.info {
+  --background: #42a5f5;
+  --color: #ffffff;
+}
+
+/* ===== Estilos adicionales para dark mode ===== */
+.dark {
+  /* Asegurar que los cards y elementos tengan buen contraste */
+  ion-card {
+    --background: var(--app-card-background, #2a2a2a);
+  }
+
+  /* Mejorar contraste en listas */
+  ion-list {
+    background: var(--app-background, #1a1a1a);
+  }
+
+  ion-item {
+    --background: transparent;
+    --color: var(--app-text, #ffffff);
+  }
+
+  /* Ajustar bordes para mejor visibilidad */
+  ion-item-divider {
+    --background: var(--app-background-alt, #242424);
+    --color: var(--app-text-secondary, #b0b0b0);
+  }
+
+  /* Mejorar visibilidad de inputs */
+  ion-input,
+  ion-textarea {
+    --color: var(--app-text, #ffffff);
+    --placeholder-color: var(--app-text-secondary, #b0b0b0);
+  }
+
+  /* Ajustar modales */
+  ion-modal {
+    --background: var(--app-background, #1a1a1a);
+  }
+
+  /* Mejorar visibilidad de toolbars */
+  ion-toolbar {
+    --background: var(--app-background-alt, #242424);
+    --color: var(--app-text, #ffffff);
+  }
+
+  /* Ajustar grids y rows */
+  ion-grid {
+    --background: var(--app-background, #1a1a1a);
+  }
+
+  /* Ajustar contenido */
+  ion-content {
+    --background: var(--app-background, #1a1a1a);
+  }
+
+  /* Mejorar visibilidad de badges */
+  ion-badge {
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-primary-contrast);
+  }
 }

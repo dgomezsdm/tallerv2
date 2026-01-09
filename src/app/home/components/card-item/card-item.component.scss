@@ -58,11 +58,19 @@
   padding: 14px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-  background: #ffffff;
+  background: var(--app-card-background, #ffffff);
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0px 12px 26px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.dark .appointment-card {
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    box-shadow: 0px 12px 26px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -96,13 +104,13 @@
   margin: 0;
   font-size: 1.05rem;
   font-weight: 700;
-  color: #222;
+  color: var(--app-text, #222);
 }
 
 .vehicle {
   margin: 0;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--app-text-secondary, #666);
 }
 
 .arrow {
@@ -124,12 +132,12 @@
   align-items: center;
   gap: 8px;
   font-size: 0.9rem;
-  color: #444;
+  color: var(--app-text, #444);
 }
 
 .info ion-icon {
   font-size: 18px;
-  color: #6e6e6e;
+  color: var(--app-text-secondary, #6e6e6e);
 }
 
 .type {

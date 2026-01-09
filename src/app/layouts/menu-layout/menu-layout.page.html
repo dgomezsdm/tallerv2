@@ -15,6 +15,13 @@
         <ion-title>Menú</ion-title>
 
         <ion-buttons slot="end">
+          <ion-button (click)="toggleTheme()" [title]="getThemeText()">
+            <ion-icon
+              slot="icon-only"
+              [ios]="getThemeIcon()"
+              [md]="getThemeIcon()"
+            ></ion-icon>
+          </ion-button>
           <ion-button (click)="goToSettings()">
             <ion-icon
               slot="icon-only"

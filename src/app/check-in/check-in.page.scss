@@ -124,7 +124,7 @@
     --padding-end: 12px;
     --padding-bottom: 12px;
     --padding-top: 12px;
-    --background: var(--ion-item-background, #fff);
+    --background: var(--app-card-background, var(--ion-item-background, #fff));
     border: 1px solid var(--ion-border-color);
     border-radius: 8px;
     font-weight: 600;

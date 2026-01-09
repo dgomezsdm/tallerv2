@@ -62,4 +62,47 @@
   --ion-color-dark-shade: #121212;
   --ion-color-dark-tint: #2c2c2c;
 
+  /* Variables personalizadas para temas */
+  --app-background: #ffffff;
+  --app-background-alt: #f5f5f5;
+  --app-text: #000000;
+  --app-text-secondary: #666666;
+  --app-border: #e0e0e0;
+  --app-card-background: #ffffff;
+  --app-toast-background: #323232;
+  --app-toast-text: #ffffff;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --ion-color-primary: #2c2c2c;
+  --ion-color-primary-rgb: 44, 44, 44;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #272727;
+  --ion-color-primary-tint: #414141;
+
+  --ion-color-secondary: #545754;
+  --ion-color-secondary-rgb: 84, 87, 84;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #4a4d4a;
+  --ion-color-secondary-tint: #656865;
+
+  --ion-color-tertiary: #747774;
+  --ion-color-tertiary-rgb: 116, 119, 116;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #666966;
+  --ion-color-tertiary-tint: #828582;
+
+  /* Variables personalizadas para dark mode */
+  --app-background: #1a1a1a;
+  --app-background-alt: #242424;
+  --app-text: #ffffff;
+  --app-text-secondary: #b0b0b0;
+  --app-border: #3a3a3a;
+  --app-card-background: #2a2a2a;
+  --app-toast-background: #2c2c2c;
+  --app-toast-text: #ffffff;
 }

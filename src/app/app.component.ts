@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ThemeService } from './shared/services/theme.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   IonApp,
@@ -70,10 +71,8 @@ import {
     RouterOutlet,
   ],
 })
-export class AppComponent {
-
-
-  constructor() {
+export class AppComponent implements OnInit {
+  constructor(private readonly themeService: ThemeService) {
     addIcons({
       imagesOutline,
       cloudUploadOutline,
@@ -114,5 +113,11 @@ export class AppComponent {
       settingsSharp,
       close
     });
+  }
+
+  ngOnInit(): void {
+    // El tema se inicializa automáticamente en el constructor del servicio
+    // pero podemos forzar la inicialización aquí si es necesario
+    this.themeService.getCurrentTheme();
   }
 }
