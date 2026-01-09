@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CheckInService } from './services/check-in-service';
 import { AppointmentData } from './interfaces/appointment-data.interface';
 import { CampaignsModalComponent } from './modals/campaigns-modal/campaigns-modal.component';
+import { AlertService } from '../shared/services/alert';
+import { LoggerService } from '../shared/services/logger.service';
 
 @Component({
   selector: 'app-check-in',
@@ -28,10 +30,12 @@ export class CheckInPage implements OnInit {
   isEmergency: boolean = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private checkInService: CheckInService,
-    private modalCtrl: ModalController,
-    private router: Router
+    private readonly route: ActivatedRoute,
+    private readonly checkInService: CheckInService,
+    private readonly modalCtrl: ModalController,
+    private readonly router: Router,
+    private readonly alertService: AlertService,
+    private readonly logger: LoggerService
   ) {}
 
   ngOnInit(): void {
@@ -40,10 +44,9 @@ export class CheckInPage implements OnInit {
       if (appointmentNumber) {
         this.loadAppointmentData(appointmentNumber);
       } else {
-        console.warn('No appointmentNumber provided');
+        this.logger.warn('No appointmentNumber provided');
+        this.alertService.toastWarning('No se proporcionó un número de cita');
         this.canStart = false;
-        // Handle case properly - maybe go back or show empty state?
-        // For now, we just don't load mock data.
       }
     });
   }
@@ -67,29 +70,32 @@ export class CheckInPage implements OnInit {
                   next: (campaigns) => {
                     if (this.cita) {
                       this.cita.VehicleCampaigns = campaigns;
-                      console.log('Campaigns loaded for badge:', campaigns);
+                      this.logger.debug('Campaigns loaded for badge', campaigns);
                     }
                   },
-                  error: (err) =>
-                    console.error('Error loading campaigns for badge', err),
+                  error: (err) => {
+                    this.logger.error('Error loading campaigns for badge', err);
+                  },
                 });
             }
 
             // Marcar chasis validado cuando llega la data
             this.hasChassis(this.cita.Chassis);
           } else {
-            console.warn('No appointment data found for number:', appointmentNumber);
+            this.logger.warn('No appointment data found for number', appointmentNumber);
+            this.alertService.toastWarning('No se encontraron datos para esta cita');
             this.canStart = false;
           }
 
-          console.log('Cita loaded:', this.cita);
+          this.logger.debug('Cita loaded', this.cita);
           // Optional: force resize if needed, though setTimeout usually suffices
           // this.content?.resize();
         }, 0);
       },
       error: (err) => {
-        console.error('Error loading appointment:', err);
-        // Handle error handling
+        this.logger.error('Error loading appointment', err);
+        this.alertService.error('No se pudo cargar la información de la cita. Por favor, intenta nuevamente.');
+        this.canStart = false;
       },
     });
   }
@@ -106,19 +112,18 @@ export class CheckInPage implements OnInit {
     // We'll keep it as true for now if loaded successfully.
   }
 
-  // Los siguientes métodos permanecen como stubs de la lógica real
   hasChassis(chassis: string): void {
     this.verificateChassis = true;
     this.canStart = true;
-    console.log(`Chassis validado (Mock): ${chassis}`);
+    this.logger.debug('Chassis validado', chassis);
   }
 
   presentAlert(): void {
-    console.log('Alerta de cerrar/cancelar presentada (Mock).');
+    this.logger.debug('Alerta de cerrar/cancelar presentada');
   }
 
-  async openModal() {
-    console.log('Abriendo modal de campañas');
+  async openModal(): Promise<void> {
+    this.logger.debug('Abriendo modal de campañas');
     if (!this.cita) return;
 
     const modal = await this.modalCtrl.create({
@@ -131,11 +136,11 @@ export class CheckInPage implements OnInit {
   }
 
   openMantModal(): void {
-    console.log('Abriendo modal de mantenimientos (Mock)');
+    this.logger.debug('Abriendo modal de mantenimientos');
   }
 
   next(): void {
-    console.log('Iniciando recepción (Mock)...');
+    this.logger.debug('Iniciando recepción');
 
     this.router.navigate(['/app/check-in/vehicle-interior'], {
       state: {

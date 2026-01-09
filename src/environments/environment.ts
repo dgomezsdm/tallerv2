@@ -6,6 +6,6 @@ export const environment = {
   clientMail: 'dgomez@sdm.com.do',
   advisorMail: 'kfeliz@sdm.com.do',
   appVersion: '1.0.100825',
-  //OLD
-  //nestMiddleWare: 'https://nestmiddleware.azurewebsites.net',
+  // URLs adicionales para servicios específicos
+  workshopReceptionUrl: 'https://workshopreception.azurewebsites.net/api/',
 };

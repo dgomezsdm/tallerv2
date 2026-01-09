@@ -63,8 +63,7 @@ export class AuthServices {
    * Obtiene los tipos de documentos disponibles
    */
   public getDocumentTypes(): Observable<any> {
-    const url =
-      'https://workshopreception.azurewebsites.net/api/WorkshopReception/TypeOfDocuments';
+    const url = `${environment.workshopReceptionUrl}WorkshopReception/TypeOfDocuments`;
     return this.http.get<any>(url);
   }
 
@@ -77,13 +76,12 @@ export class AuthServices {
     );
   }
 
-  // Método adicional si necesitas el dato de cita comentado
   /**
    * Obtiene datos de una cita específica
    * @param appointmentId - ID de la cita
    */
   public getAppointmentData(appointmentId: string): Observable<any> {
-    const url = `https://workshopreception.azurewebsites.net/api/WorkshopReception/GetAppointmentData/${appointmentId}`;
+    const url = `${environment.workshopReceptionUrl}WorkshopReception/GetAppointmentData/${appointmentId}`;
     return this.http.get<any>(url);
   }
 }

@@ -17,6 +17,7 @@ import {
 import { AuthServices } from '../services/auth-services';
 import { LocalStorageService } from 'src/app/shared/services/local-storage';
 import { AlertService } from 'src/app/shared/services/alert';
+import { LoggerService } from 'src/app/shared/services/logger.service';
 import { environment } from 'src/environments/environment';
 
 // Importar interfaces
@@ -75,7 +76,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private readonly loginService: AuthServices,
     private readonly localStorageService: LocalStorageService,
     private readonly alertService: AlertService,
-    private readonly loadingController: LoadingController
+    private readonly loadingController: LoadingController,
+    private readonly logger: LoggerService
   ) {
     this.registerIcons();
   }
@@ -145,7 +147,7 @@ export class LoginPage implements OnInit, OnDestroy {
           this.handleWorkshopsResponse(workshops);
         },
         error: async (error) => {
-          console.error('Error al cargar talleres:', error);
+          this.logger.error('Error al cargar talleres', error);
           await this.alertService.hideLoading(loading);
           await this.alertService.error(
             'No se pudieron cargar los talleres. Por favor, intenta nuevamente.'
@@ -245,7 +247,7 @@ export class LoginPage implements OnInit, OnDestroy {
         await this.router.navigate(['/app/home']);
       }, 500);
     } catch (error) {
-      console.error('Error al guardar sesión:', error);
+      this.logger.error('Error al guardar sesión', error);
       await this.alertService.error('Ocurrió un error al guardar la sesión');
     }
   }
@@ -277,7 +279,7 @@ export class LoginPage implements OnInit, OnDestroy {
     try {
       await this.localStorageService.removeMany(this.STORAGE_KEYS_TO_CLEAR);
     } catch (error) {
-      console.error('Error al limpiar localStorage:', error);
+      this.logger.error('Error al limpiar localStorage', error);
     }
   }
 
@@ -304,7 +306,7 @@ export class LoginPage implements OnInit, OnDestroy {
           }
         },
         error: (error) => {
-          console.warn('No se pudo verificar la versión de la app:', error);
+          this.logger.warn('No se pudo verificar la versión de la app', error);
         },
       });
   }

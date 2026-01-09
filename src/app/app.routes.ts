@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './auth/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
   // 🔒 Rutas privadas con layout
   {
     path: 'app',
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./layouts/menu-layout/menu-layout.page').then(
         (m) => m.MenuLayoutPage
